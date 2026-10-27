@@ -1,0 +1,78 @@
+[
+  {
+    "slug": "milkmaid",
+    "catalogId": "rijks-sk-a-2344",
+    "title": "The Milkmaid",
+    "artist": "Johannes Vermeer",
+    "date": "c. 1660",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-2344",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-2344",
+    "imageUrl": "https://iiif.micr.io/QkOGy/full/2400,/0/default.jpg",
+    "focal": "52% 50%",
+    "alt": "The Milkmaid by Johannes Vermeer, c. 1660: a maid in a yellow bodice and blue apron pours milk into a bowl beside a basket of bread, lit by a window.",
+    "roles": [
+      "hero"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-2344.jpg"
+  },
+  {
+    "slug": "van-gogh-self-portrait",
+    "catalogId": "rijks-sk-a-3262",
+    "title": "Self-portrait",
+    "artist": "Vincent van Gogh",
+    "date": "1887",
+    "medium": "Oil on cardboard",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-3262",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-3262",
+    "imageUrl": "https://iiif.micr.io/bTpft/full/2400,/0/default.jpg",
+    "focal": "50% 40%",
+    "alt": "Self-portrait by Vincent van Gogh, 1887: the red-bearded artist in a grey felt hat, painted in short, rhythmic strokes against a blue-green background.",
+    "roles": [
+      "hero"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-3262.jpg"
+  },
+  {
+    "slug": "merry-drinker",
+    "catalogId": "rijks-sk-a-135",
+    "title": "The Merry Drinker",
+    "artist": "Frans Hals",
+    "date": "c. 1628–30",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-135",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-135",
+    "imageUrl": "https://iiif.micr.io/CgrHr/full/2400,/0/default.jpg",
+    "focal": "50% 40%",
+    "alt": "The Merry Drinker by Frans Hals, c. 1628–30: a smiling man in a broad black hat and lace collar raises one hand and holds out a glass of wine.",
+    "roles": [
+      "hero"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-135.jpg"
+  },
+  {
+    "slug": "red-kerchief",
+    "catalogId": "cma-135382",
+    "title": "The Red Kerchief",
+    "artist": "Claude Monet",
+    "date": "c. 1868–73",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1958.39",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1958.39",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1958.39/1958.39_print.jpg",
+    "focal": "56% 50%",
+    "alt": "The Red Kerchief by Claude Monet, c. 1868–73: a woman in a red hood passes a snowy garden, seen through glass doors framed by white curtains.",
+    "roles": [
+      "hero"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135382.jpg"
+  }
+]

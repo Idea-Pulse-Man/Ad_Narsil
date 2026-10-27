@@ -1,0 +1,90 @@
+{
+  "milkmaid": {
+    "width": 2400,
+    "height": 2673,
+    "palette": [
+      "#221d1a",
+      "#84745d",
+      "#c7c4ae",
+      "#2f2f2a",
+      "#343c3e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAABwAwCdASoQABIAPu1iqk2ppaQiMAgBMB2JQBOgAf3+9BdQJgAA/qpJBubQgVdmbNF43f3bnae/4mv7icMMG6BHy96xxp6mlwT5r3W8AAA=",
+    "avif": {
+      "480": "/art/milkmaid-480.739e836a.avif",
+      "960": "/art/milkmaid-960.035f0f8d.avif",
+      "1600": "/art/milkmaid-1600.23b885b9.avif"
+    },
+    "webp": {
+      "480": "/art/milkmaid-480.77f952d7.webp",
+      "960": "/art/milkmaid-960.0ee59d1f.webp",
+      "1600": "/art/milkmaid-1600.93e68d67.webp"
+    }
+  },
+  "van-gogh-self-portrait": {
+    "width": 2400,
+    "height": 2976,
+    "palette": [
+      "#3c494a",
+      "#3f5a60",
+      "#66574a",
+      "#676b64",
+      "#887b6d"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAwAwCdASoQABQAPu1iqU2ppaQiMAgBMB2JZQAASn3jYffAAP6iPQVIXrZUtMPAXtHkO46foPUiCmZ42Bk0AA==",
+    "avif": {
+      "480": "/art/van-gogh-self-portrait-480.3fcb04ba.avif",
+      "960": "/art/van-gogh-self-portrait-960.5bce4fe8.avif",
+      "1600": "/art/van-gogh-self-portrait-1600.c2d25a38.avif"
+    },
+    "webp": {
+      "480": "/art/van-gogh-self-portrait-480.1959567b.webp",
+      "960": "/art/van-gogh-self-portrait-960.71dab02c.webp",
+      "1600": "/art/van-gogh-self-portrait-1600.dbee623b.webp"
+    }
+  },
+  "merry-drinker": {
+    "width": 2400,
+    "height": 2872,
+    "palette": [
+      "#4d412b",
+      "#795a32",
+      "#986e35",
+      "#947d53",
+      "#c6a979"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABQBACdASoQABMAPu1iqU2ppaOiMAgBMB2JYgCdMoADS4TM3rOolI8XGEeAAP65uFifiopmIqmnD8QSNgMJjHqHdHyiTQc2UG/vKL+8pH9vrAAA",
+    "avif": {
+      "480": "/art/merry-drinker-480.8305b389.avif",
+      "960": "/art/merry-drinker-960.3273efe1.avif",
+      "1600": "/art/merry-drinker-1600.f6a51bcb.avif"
+    },
+    "webp": {
+      "480": "/art/merry-drinker-480.d914763a.webp",
+      "960": "/art/merry-drinker-960.d4ec2b7b.webp",
+      "1600": "/art/merry-drinker-1600.4629fefd.webp"
+    }
+  },
+  "red-kerchief": {
+    "width": 2732,
+    "height": 3400,
+    "palette": [
+      "#363737",
+      "#4c453e",
+      "#555858",
+      "#6e706c",
+      "#838b8e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABwAwCdASoQABQAPu1iqU2ppaQiMAgBMB2JZwAAQQfY7yYmJsAA/qgaZn6edF7EgpQ18VAoT9A6HIJWh35790h8neGQAA==",
+    "avif": {
+      "480": "/art/red-kerchief-480.72ae53b1.avif",
+      "960": "/art/red-kerchief-960.1740c33b.avif",
+      "1600": "/art/red-kerchief-1600.d4f4a35e.avif"
+    },
+    "webp": {
+      "480": "/art/red-kerchief-480.50030266.webp",
+      "960": "/art/red-kerchief-960.4c10a10e.webp",
+      "1600": "/art/red-kerchief-1600.2c9e3bd8.webp"
+    }
+  }
+}
