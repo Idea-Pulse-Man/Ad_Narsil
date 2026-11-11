@@ -14,7 +14,9 @@
     "focal": "52% 50%",
     "alt": "The Milkmaid by Johannes Vermeer, c. 1660: a maid in a yellow bodice and blue apron pours milk into a bowl beside a basket of bread, lit by a window.",
     "roles": [
-      "hero"
+      "hero",
+      "age:baroque",
+      "print"
     ],
     "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-2344.jpg"
   },
@@ -33,7 +35,8 @@
     "focal": "50% 40%",
     "alt": "Self-portrait by Vincent van Gogh, 1887: the red-bearded artist in a grey felt hat, painted in short, rhythmic strokes against a blue-green background.",
     "roles": [
-      "hero"
+      "hero",
+      "gallery"
     ],
     "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-3262.jpg"
   },
@@ -52,7 +55,8 @@
     "focal": "50% 40%",
     "alt": "The Merry Drinker by Frans Hals, c. 1628–30: a smiling man in a broad black hat and lace collar raises one hand and holds out a glass of wine.",
     "roles": [
-      "hero"
+      "hero",
+      "rank:1"
     ],
     "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-135.jpg"
   },
@@ -71,8 +75,927 @@
     "focal": "56% 50%",
     "alt": "The Red Kerchief by Claude Monet, c. 1868–73: a woman in a red hood passes a snowy garden, seen through glass doors framed by white curtains.",
     "roles": [
-      "hero"
+      "hero",
+      "print"
     ],
     "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135382.jpg"
+  },
+  {
+    "slug": "coffin-of-bakenmut",
+    "catalogId": "cma-93984",
+    "title": "Coffin of Bakenmut",
+    "artist": "Egypt, Thebes",
+    "date": "c. 1000–900 BCE",
+    "medium": "Gessoed and painted sycamore fig",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1914.561",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1914.561",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1914.561/1914.561_print.jpg",
+    "focal": "30% 30%",
+    "alt": "Coffin of Bakenmut, Egypt, c. 1000–900 BCE: the painted wooden lid and case shown side by side, covered in gods, hieroglyphs and bands of colour, with a gilded face at the top.",
+    "roles": [
+      "age:egypt",
+      "story"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-93984.jpg"
+  },
+  {
+    "slug": "amenhotep-iii-blue-crown",
+    "catalogId": "cma-130133",
+    "title": "Head of Amenhotep III Wearing the Blue Crown",
+    "artist": "Egypt, New Kingdom",
+    "date": "c. 1391–1353 BCE",
+    "medium": "Granodiorite",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1952.513",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1952.513",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.513/1952.513_print.jpg",
+    "focal": "50% 45%",
+    "alt": "Head of Amenhotep III wearing the blue crown, Egypt, c. 1391–1353 BCE: a granodiorite portrait of the pharaoh with a royal cobra rising from the front of his tall crown.",
+    "roles": [
+      "age:egypt",
+      "quiz"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-130133.jpg"
+  },
+  {
+    "slug": "head-of-userkaf",
+    "catalogId": "cma-149594",
+    "title": "Head of King Userkaf",
+    "artist": "Egypt, Old Kingdom",
+    "date": "c. 2454–2447 BCE",
+    "medium": "Painted limestone",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1979.2",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1979.2",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1979.2/1979.2_print.jpg",
+    "focal": "50% 45%",
+    "alt": "Head of King Userkaf, Egypt, c. 2454–2447 BCE: a pale painted-limestone head wearing the tall white crown of Upper Egypt, with a painted moustache.",
+    "roles": [
+      "age:egypt"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-149594.jpg"
+  },
+  {
+    "slug": "athena-lekythos",
+    "catalogId": "cma-149405",
+    "title": "Red-Figure Lekythos (Oil Vessel): Athena Slaying Giant (body); Satyr between Maenads (shoulder)",
+    "artist": "Berlin Painter",
+    "date": "c. 490 BCE",
+    "medium": "Ceramic",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1978.59",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1978.59",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1978.59/1978.59_print.jpg",
+    "focal": "50% 50%",
+    "alt": "Red-figure lekythos by the Berlin Painter, c. 490 BCE: a tall black oil jar on which an orange figure of Athena strikes down a giant.",
+    "roles": [
+      "age:antiquity"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-149405.jpg"
+  },
+  {
+    "slug": "fayum-portrait-woman",
+    "catalogId": "cma-145924",
+    "title": "Funerary Portrait of a Woman",
+    "artist": "Roman Egypt",
+    "date": "c. 138–92 CE",
+    "medium": "Encaustic on linen",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1971.136",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1971.136",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1971.136/1971.136_print.jpg",
+    "focal": "50% 40%",
+    "alt": "Funerary portrait of a woman, Roman Egypt, c. 138–192 CE: a lifelike painting on linen of a dark-eyed woman with curled black hair and gold earrings.",
+    "roles": [
+      "age:antiquity",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-145924.jpg"
+  },
+  {
+    "slug": "akotantos-icon",
+    "catalogId": "cma-168322",
+    "title": "Icon of the Mother of God and Infant Christ (Virgin Eleousa)",
+    "artist": "Angelos Akotantos",
+    "date": "c. 1425–50",
+    "medium": "Tempera and gold on wood",
+    "museum": "Cleveland Museum of Art",
+    "accession": "2010.154",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/2010.154",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/2010.154/2010.154_print.jpg",
+    "focal": "50% 40%",
+    "alt": "Icon of the Virgin Eleousa by Angelos Akotantos, c. 1425–50: the Virgin in a deep red mantle presses her cheek to the Christ Child's against a gold ground.",
+    "roles": [
+      "age:medieval",
+      "story"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-168322.jpg"
+  },
+  {
+    "slug": "lochner-virgin-angels",
+    "catalogId": "cma-143761",
+    "title": "The Virgin Crowned by Angels",
+    "artist": "Stefan Lochner",
+    "date": "c. 1450",
+    "medium": "Oil on wood",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1968.20",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1968.20",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1968.20/1968.20_print.jpg",
+    "focal": "50% 35%",
+    "alt": "The Virgin Crowned by Angels by Stefan Lochner, c. 1450: the Virgin in a red robe holds the Christ Child before a patterned gold cloth as small angels hold a crown above her.",
+    "roles": [
+      "age:medieval"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-143761.jpg"
+  },
+  {
+    "slug": "byzantine-ivory",
+    "catalogId": "cma-107310",
+    "title": "Ivory Plaque with Enthroned Mother of God (\"The Stroganoff Ivory\")",
+    "artist": "Byzantium, Constantinople",
+    "date": "950–1025",
+    "medium": "Ivory",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1925.1293",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1925.1293",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1925.1293/1925.1293_print.jpg",
+    "focal": "50% 40%",
+    "alt": "The Stroganoff Ivory, Constantinople, 950–1025: a carved ivory plaque of the Virgin enthroned under an arch, holding the Christ Child, with angels in the corners.",
+    "roles": [
+      "age:medieval"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-107310.jpg"
+  },
+  {
+    "slug": "lippi-holy-family",
+    "catalogId": "cma-113202",
+    "title": "The Holy Family with Saint John the Baptist and Saint Margaret",
+    "artist": "Filippino Lippi",
+    "date": "c. 1488–93",
+    "medium": "Tempera and oil on wood",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1932.227",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1932.227",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1932.227/1932.227_print.jpg",
+    "focal": "50% 50%",
+    "alt": "The Holy Family with Saint John the Baptist and Saint Margaret by Filippino Lippi, c. 1488–93: a round painting in a gilded frame of the Virgin in blue with the infant Christ, Joseph and saints.",
+    "roles": [
+      "age:renaissance",
+      "quiz"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-113202.jpg"
+  },
+  {
+    "slug": "bronzino-woman",
+    "catalogId": "cma-146469",
+    "title": "Portrait of a Woman",
+    "artist": "Agnolo Bronzino",
+    "date": "c. 1550",
+    "medium": "Oil on wood",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1972.121",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1972.121",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1972.121/1972.121_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Portrait of a Woman by Agnolo Bronzino, c. 1550: a pale young woman in a black dress with a white lace collar and gold necklace rests a hand on her chest.",
+    "roles": [
+      "age:renaissance",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-146469.jpg"
+  },
+  {
+    "slug": "cranach-hartenfels",
+    "catalogId": "cma-135428",
+    "title": "Hunting near Hartenfels Castle",
+    "artist": "Lucas Cranach the Elder",
+    "date": "1540",
+    "medium": "Oil, originally on wood, transferred to masonite",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1958.425",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1958.425",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1958.425/1958.425_print.jpg",
+    "focal": "50% 40%",
+    "alt": "Hunting near Hartenfels Castle by Lucas Cranach the Elder, 1540: a crowded green landscape of hunters and stags around a river, with a white castle on the hill.",
+    "roles": [
+      "age:renaissance"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135428.jpg"
+  },
+  {
+    "slug": "la-tour-saint-peter",
+    "catalogId": "cma-128842",
+    "title": "Saint Peter Repentant",
+    "artist": "Georges de La Tour",
+    "date": "1645",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1951.454",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1951.454",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1951.454/1951.454_print.jpg",
+    "focal": "60% 30%",
+    "alt": "Saint Peter Repentant by Georges de La Tour, 1645: an old man clasps his hands and looks up in the glow of a lantern, a rooster beside him in the dark.",
+    "roles": [
+      "age:baroque"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-128842.jpg"
+  },
+  {
+    "slug": "turner-burning-parliament",
+    "catalogId": "cma-122351",
+    "title": "The Burning of the Houses of Lords and Commons, 16 October 1834",
+    "artist": "Joseph Mallord William Turner",
+    "date": "1835",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1942.647",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1942.647",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1942.647/1942.647_print.jpg",
+    "focal": "45% 40%",
+    "alt": "The Burning of the Houses of Lords and Commons by J. M. W. Turner, 1835: flames and smoke pour into the night sky above the Thames, lighting the water gold.",
+    "roles": [
+      "age:romantic",
+      "print"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-122351.jpg"
+  },
+  {
+    "slug": "hokusai-south-wind",
+    "catalogId": "cma-111654",
+    "title": "South Wind, Clear Sky, from Thirty-Six Views of Mount Fuji",
+    "artist": "Katsushika Hokusai",
+    "date": "early 1830s",
+    "medium": "Color woodblock print",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1930.189",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1930.189",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1930.189/1930.189_print.jpg",
+    "focal": "65% 50%",
+    "alt": "South Wind, Clear Sky by Katsushika Hokusai, early 1830s: Mount Fuji glows red under a blue sky of rows of white clouds.",
+    "roles": [
+      "age:romantic",
+      "story",
+      "print"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-111654.jpg"
+  },
+  {
+    "slug": "hoitsu-paulownias",
+    "catalogId": "cma-140476",
+    "title": "Paulownias and Chrysanthemums",
+    "artist": "Sakai Hōitsu",
+    "date": "early 1800s",
+    "medium": "Two-panel folding screen; ink and color on gilded paper",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1964.386",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1964.386",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1964.386/1964.386_print.jpg",
+    "focal": "50% 50%",
+    "alt": "Paulownias and Chrysanthemums by Sakai Hōitsu, early 1800s: a folding screen of gold paper with a paulownia tree, white chrysanthemums and a winding blue stream.",
+    "roles": [
+      "age:romantic",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-140476.jpg"
+  },
+  {
+    "slug": "van-gogh-plane-trees",
+    "catalogId": "cma-125249",
+    "title": "The Large Plane Trees (Road Menders at Saint-Rémy)",
+    "artist": "Vincent van Gogh",
+    "date": "1889",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1947.209",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1947.209",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1947.209/1947.209_print.jpg",
+    "focal": "45% 50%",
+    "alt": "The Large Plane Trees by Vincent van Gogh, 1889: huge twisting trees with yellow autumn leaves line a street in Saint-Rémy where road menders dig up the paving.",
+    "roles": [
+      "age:modern",
+      "placard",
+      "print",
+      "large"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-125249.jpg"
+  },
+  {
+    "slug": "monet-water-lilies",
+    "catalogId": "cma-136510",
+    "title": "Water Lilies (Agapanthus)",
+    "artist": "Claude Monet",
+    "date": "c. 1915–26",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1960.81",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1960.81",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1960.81/1960.81_print.jpg",
+    "focal": "50% 50%",
+    "alt": "Water Lilies (Agapanthus) by Claude Monet, c. 1915–26: a long, wide canvas of a violet and green pond scattered with pale lily pads.",
+    "roles": [
+      "age:modern",
+      "print",
+      "guild",
+      "large"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-136510.jpg"
+  },
+  {
+    "slug": "cezanne-sainte-victoire",
+    "catalogId": "cma-135185",
+    "title": "Mount Sainte-Victoire",
+    "artist": "Paul Cezanne",
+    "date": "c. 1904",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1958.21",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1958.21",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1958.21/1958.21_print.jpg",
+    "focal": "60% 40%",
+    "alt": "Mount Sainte-Victoire by Paul Cézanne, c. 1904: the blue-grey mountain rises over a landscape of patchy green, ochre and orange brushstrokes.",
+    "roles": [
+      "age:modern",
+      "quiz",
+      "large"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135185.jpg"
+  },
+  {
+    "slug": "church-twilight",
+    "catalogId": "cma-141639",
+    "title": "Twilight in the Wilderness",
+    "artist": "Frederic Edwin Church",
+    "date": "1860",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1965.233",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1965.233",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1965.233/1965.233_print.jpg",
+    "focal": "50% 40%",
+    "alt": "Twilight in the Wilderness by Frederic Edwin Church, 1860: a blazing red and gold sunset over a dark river valley and silhouetted trees.",
+    "roles": [
+      "gallery",
+      "print",
+      "guild"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-141639.jpg"
+  },
+  {
+    "slug": "de-hooch-music",
+    "catalogId": "cma-128391",
+    "title": "Portrait of a Family Playing Music",
+    "artist": "Pieter de Hooch",
+    "date": "1663",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1951.355",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1951.355",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1951.355/1951.355_print.jpg",
+    "focal": "35% 55%",
+    "alt": "Portrait of a Family Playing Music by Pieter de Hooch, 1663: a Dutch family in black and red plays instruments in a tall room with a chequered floor.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-128391.jpg"
+  },
+  {
+    "slug": "manet-morisot",
+    "catalogId": "cma-135336",
+    "title": "Berthe Morisot with a Muff",
+    "artist": "Édouard Manet",
+    "date": "c. 1871–72",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1958.34",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1958.34",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1958.34/1958.34_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Berthe Morisot with a Muff by Édouard Manet, c. 1871–72: the painter Berthe Morisot in a dark bonnet looks to the side, her hands in a fur muff.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135336.jpg"
+  },
+  {
+    "slug": "corot-cervara",
+    "catalogId": "cma-140078",
+    "title": "La Cervara, the Roman Campagna",
+    "artist": "Jean Baptiste Camille Corot",
+    "date": "c. 1830–31",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1963.91",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1963.91",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1963.91/1963.91_print.jpg",
+    "focal": "50% 50%",
+    "alt": "La Cervara, the Roman Campagna by Camille Corot, c. 1830–31: a sunlit plain with a dusty road, low cliffs, a few trees and small figures under a wide sky.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-140078.jpg"
+  },
+  {
+    "slug": "van-beyeren-still-life",
+    "catalogId": "cma-136509",
+    "title": "Silver Wine Jug, Ham, and Fruit",
+    "artist": "Abraham van Beyeren",
+    "date": "c. 1660–66",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1960.80",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1960.80",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1960.80/1960.80_print.jpg",
+    "focal": "50% 45%",
+    "alt": "Silver Wine Jug, Ham, and Fruit by Abraham van Beyeren, c. 1660–66: a tall silver jug, a ham, peaches and grapes piled on a table in deep shadow.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-136509.jpg"
+  },
+  {
+    "slug": "bierstadt-starr-king",
+    "catalogId": "cma-172815",
+    "title": "Mount Starr King, Yosemite",
+    "artist": "Albert Bierstadt",
+    "date": "1866",
+    "medium": "Oil on canvas on panel-back stretcher",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1922.684",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1922.684",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1922.684/1922.684_print.jpg",
+    "focal": "50% 45%",
+    "alt": "Mount Starr King, Yosemite by Albert Bierstadt, 1866: sunlight breaks through clouds over granite cliffs, a valley of pines and a calm river.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-172815.jpg"
+  },
+  {
+    "slug": "degas-stefanina",
+    "catalogId": "cma-135265",
+    "title": "Stefanina Primicile Carafa, Marchioness of Cicerale and Duchess of Montejasi",
+    "artist": "Edgar Degas",
+    "date": "c. 1875",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1958.28",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1958.28",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1958.28/1958.28_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Stefanina Primicile Carafa, Marchioness of Cicerale, by Edgar Degas, c. 1875: an older woman in black with a black bonnet, her face pale and still.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-135265.jpg"
+  },
+  {
+    "slug": "shah-jahan",
+    "catalogId": "cma-101358",
+    "title": "Shah Jahan",
+    "artist": "Hashim",
+    "date": "c. 1630",
+    "medium": "Gum tempera, ink, and gold on paper",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1920.1969",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1920.1969",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1920.1969/1920.1969_print.jpg",
+    "focal": "60% 40%",
+    "alt": "Shah Jahan by Hashim, c. 1630: the Mughal emperor in profile, in a red turban with jewels and pearls, inside a green oval on cream paper.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-101358.jpg"
+  },
+  {
+    "slug": "van-dyck-genoese-lady",
+    "catalogId": "cma-131819",
+    "title": "A Genoese Lady with Her Child",
+    "artist": "Anthony van Dyck",
+    "date": "c. 1623–25",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1954.392",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1954.392",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1954.392/1954.392_print.jpg",
+    "focal": "50% 30%",
+    "alt": "A Genoese Lady with Her Child by Anthony van Dyck, c. 1623–25: a woman in a black gown and wide white ruff stands beside her young child.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-131819.jpg"
+  },
+  {
+    "slug": "fish-plate",
+    "catalogId": "cma-152699",
+    "title": "Red-Figure Fish Plate: Octopi, Mullet, Bream, Shellfish",
+    "artist": "Asteas/Python Workshop",
+    "date": "c. 340–330 BCE",
+    "medium": "Ceramic",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1985.50",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1985.50",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1985.50/1985.50_print.jpg",
+    "focal": "50% 50%",
+    "alt": "Red-figure fish plate, southern Italy, c. 340–330 BCE: a round black plate painted with orange fish, an octopus and shellfish swimming around the centre.",
+    "roles": [
+      "age:antiquity",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-152699.jpg"
+  },
+  {
+    "slug": "turner-queen-mab",
+    "catalogId": "cma-95263",
+    "title": "Queen Mab's Cave",
+    "artist": "Joseph Mallord William Turner",
+    "date": "after 1846",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1916.1036",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1916.1036",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1916.1036/1916.1036_print.jpg",
+    "focal": "45% 40%",
+    "alt": "Queen Mab's Cave by J. M. W. Turner, after 1846: a dreamlike haze of gold and blue with a rocky arch and a castle rising in the mist.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-95263.jpg"
+  },
+  {
+    "slug": "courbet-alps",
+    "catalogId": "cma-141168",
+    "title": "Panoramic View of the Alps, Les Dents du Midi",
+    "artist": "Gustave Courbet",
+    "date": "1877",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1964.420",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1964.420",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1964.420/1964.420_print.jpg",
+    "focal": "50% 40%",
+    "alt": "Panoramic View of the Alps, Les Dents du Midi by Gustave Courbet, 1877: snowy grey peaks rise beyond a green meadow under a cloudy blue sky.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-141168.jpg"
+  },
+  {
+    "slug": "renoir-romaine-lacaux",
+    "catalogId": "cma-121188",
+    "title": "Romaine Lacaux",
+    "artist": "Pierre-Auguste Renoir",
+    "date": "1864",
+    "medium": "Oil on fabric",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1942.1065",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1942.1065",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1942.1065/1942.1065_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Romaine Lacaux by Pierre-Auguste Renoir, 1864: a young girl in a grey dress with a white blouse sits holding a few red flowers.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-121188.jpg"
+  },
+  {
+    "slug": "gainsborough-mary-wise",
+    "catalogId": "cma-124080",
+    "title": "Portrait of Mary Wise",
+    "artist": "Thomas Gainsborough",
+    "date": "c. 1774",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1944.82",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1944.82",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1944.82/1944.82_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Portrait of Mary Wise by Thomas Gainsborough, c. 1774: a woman with powdered upswept hair rests her chin on her hand, in a silvery gown.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-124080.jpg"
+  },
+  {
+    "slug": "hokusai-sanjo",
+    "catalogId": "cma-152505",
+    "title": "Poem by Emperor Sanjo, from the series One Hundred Poems by One Hundred Poets Explained by an Old Nurse",
+    "artist": "Katsushika Hokusai",
+    "date": "1835–36",
+    "medium": "Color woodblock print",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1985.326",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1985.326",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1985.326/1985.326_print.jpg",
+    "focal": "50% 50%",
+    "alt": "Poem by Emperor Sanjo by Katsushika Hokusai, 1835–36: courtiers in a pavilion gaze out at a full moon over a dark blue bay.",
+    "roles": [
+      "gallery",
+      "quiz"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-152505.jpg"
+  },
+  {
+    "slug": "rembrandt-bearded-man",
+    "catalogId": "cma-127573",
+    "title": "A Bearded Man Wearing a Hat",
+    "artist": "Rembrandt van Rijn",
+    "date": "c. 1655–60",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1950.252",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1950.252",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1950.252/1950.252_print.jpg",
+    "focal": "50% 35%",
+    "alt": "A Bearded Man Wearing a Hat by Rembrandt van Rijn, c. 1655–60: a man with a dark beard and a black hat looks down, his face half in shadow.",
+    "roles": [
+      "rank:2"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-127573.jpg"
+  },
+  {
+    "slug": "hals-roosterman",
+    "catalogId": "cma-160885",
+    "title": "Portrait of Tieleman Roosterman",
+    "artist": "Frans Hals",
+    "date": "1634",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1999.173",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1999.173",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1999.173/1999.173_print.jpg",
+    "focal": "50% 25%",
+    "alt": "Portrait of Tieleman Roosterman by Frans Hals, 1634: a smiling merchant in black with a wide white collar stands with a hand on his hip.",
+    "roles": [
+      "rank:3"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-160885.jpg"
+  },
+  {
+    "slug": "aved-du-theil",
+    "catalogId": "cma-141476",
+    "title": "Portrait of Jean-Gabriel du Theil at the Signing of the Treaty of Vienna",
+    "artist": "Jacques André Joseph Aved",
+    "date": "1738–40",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1964.89",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1964.89",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1964.89/1964.89_print.jpg",
+    "focal": "50% 30%",
+    "alt": "Portrait of Jean-Gabriel du Theil by Jacques Aved, 1738–40: a diplomat in a gold-embroidered coat and white wig sits at a desk with pen and papers.",
+    "roles": [
+      "rank:4"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-141476.jpg"
+  },
+  {
+    "slug": "rigaud-dubois",
+    "catalogId": "cma-143206",
+    "title": "Portrait of Cardinal Guillaume Dubois",
+    "artist": "Hyacinthe Rigaud",
+    "date": "1723",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1967.17",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1967.17",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1967.17/1967.17_print.jpg",
+    "focal": "45% 25%",
+    "alt": "Portrait of Cardinal Guillaume Dubois by Hyacinthe Rigaud, 1723: the cardinal in scarlet robes and a lace surplice sits before shelves of books.",
+    "roles": [
+      "rank:5"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-143206.jpg"
+  },
+  {
+    "slug": "berruguete-sixtus-iv",
+    "catalogId": "cma-97180",
+    "title": "Portrait of Pope Sixtus IV della Rovere",
+    "artist": "Pedro Berruguete",
+    "date": "c. 1476–82",
+    "medium": "Oil on wood, transferred to canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "1916.815",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/1916.815",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/1916.815/1916.815_print.jpg",
+    "focal": "45% 25%",
+    "alt": "Portrait of Pope Sixtus IV by Pedro Berruguete, c. 1476–82: the pope in a jewelled tiara and gold cope raises one hand.",
+    "roles": [
+      "rank:6"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-97180.jpg"
+  },
+  {
+    "slug": "pourbus-louis-xiii",
+    "catalogId": "cma-162623",
+    "title": "Portrait of King Louis XIII of France",
+    "artist": "Frans Pourbus",
+    "date": "1611",
+    "medium": "Oil on canvas",
+    "museum": "Cleveland Museum of Art",
+    "accession": "2003.225",
+    "license": "CC0",
+    "sourceUrl": "https://clevelandart.org/art/2003.225",
+    "imageUrl": "https://openaccess-cdn.clevelandart.org/2003.225/2003.225_print.jpg",
+    "focal": "50% 20%",
+    "alt": "Portrait of King Louis XIII of France by Frans Pourbus, 1611: the boy king in a pink slashed costume with a blue sash stands before a green curtain.",
+    "roles": [
+      "rank:7"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/cma-162623.jpg"
+  },
+  {
+    "slug": "night-watch",
+    "catalogId": "rijks-sk-c-5",
+    "title": "The Night Watch",
+    "artist": "Rembrandt van Rijn",
+    "date": "1642",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-C-5",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-C-5",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-5.jpg",
+    "focal": "50% 55%",
+    "alt": "The Night Watch by Rembrandt van Rijn, 1642: a militia company steps out of shadow, led by a captain in black and a lieutenant in bright yellow.",
+    "roles": [
+      "age:baroque",
+      "story",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-5.jpg"
+  },
+  {
+    "slug": "little-street",
+    "catalogId": "rijks-sk-a-2860",
+    "title": "The Little Street",
+    "artist": "Johannes Vermeer",
+    "date": "c. 1658",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-2860",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-2860",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-2860.jpg",
+    "focal": "50% 50%",
+    "alt": "The Little Street by Johannes Vermeer, c. 1658: the brick front of a house in Delft, with a woman sewing in the doorway and children at play on the pavement.",
+    "roles": [
+      "gallery",
+      "print"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-2860.jpg"
+  },
+  {
+    "slug": "threatened-swan",
+    "catalogId": "rijks-sk-a-4",
+    "title": "The Threatened Swan",
+    "artist": "Jan Asselijn",
+    "date": "c. 1650",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-4",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-4",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-4.jpg",
+    "focal": "50% 45%",
+    "alt": "The Threatened Swan by Jan Asselijn, c. 1650: a white swan spreads its wings and hisses to defend its nest against a dog in the water.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-4.jpg"
+  },
+  {
+    "slug": "avercamp-skaters",
+    "catalogId": "rijks-sk-a-1718",
+    "title": "Winter Landscape with Ice Skaters",
+    "artist": "Hendrick Avercamp",
+    "date": "c. 1608",
+    "medium": "Oil on panel",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-1718",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-1718",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-1718.jpg",
+    "focal": "50% 55%",
+    "alt": "Winter Landscape with Ice Skaters by Hendrick Avercamp, c. 1608: dozens of tiny figures skate, fall and talk on a frozen river below a pale sky.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-1718.jpg"
+  },
+  {
+    "slug": "woman-reading-letter",
+    "catalogId": "rijks-sk-c-251",
+    "title": "Woman Reading a Letter",
+    "artist": "Johannes Vermeer",
+    "date": "c. 1663",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-C-251",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-C-251",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-251.jpg",
+    "focal": "60% 40%",
+    "alt": "Woman Reading a Letter by Johannes Vermeer, c. 1663: a woman in a blue jacket stands by a window, absorbed in a letter held in both hands.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-251.jpg"
+  },
+  {
+    "slug": "ruisdael-windmill",
+    "catalogId": "rijks-sk-c-211",
+    "title": "The Windmill at Wijk bij Duurstede",
+    "artist": "Jacob van Ruisdael",
+    "date": "c. 1668–70",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-C-211",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-C-211",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-211.jpg",
+    "focal": "50% 45%",
+    "alt": "The Windmill at Wijk bij Duurstede by Jacob van Ruisdael, c. 1668–70: a tall windmill stands dark against a grey, cloudy sky above a river.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-211.jpg"
+  },
+  {
+    "slug": "jewish-bride",
+    "catalogId": "rijks-sk-c-216",
+    "title": "Isaac and Rebecca, known as ‘The Jewish Bride’",
+    "artist": "Rembrandt van Rijn",
+    "date": "c. 1665–69",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-C-216",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-C-216",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-216.jpg",
+    "focal": "50% 35%",
+    "alt": "Isaac and Rebecca (The Jewish Bride) by Rembrandt van Rijn, c. 1665–69: a couple in gold and red embrace tenderly, his hand on her chest, hers on his.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-c-216.jpg"
+  },
+  {
+    "slug": "rembrandt-apostle-paul",
+    "catalogId": "rijks-sk-a-4050",
+    "title": "Self-portrait as the Apostle Paul",
+    "artist": "Rembrandt van Rijn",
+    "date": "1661",
+    "medium": "Oil on canvas",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-4050",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-4050",
+    "imageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-4050.jpg",
+    "focal": "50% 30%",
+    "alt": "Self-portrait as the Apostle Paul by Rembrandt van Rijn, 1661: the ageing painter in a pale turban raises his eyebrows, a manuscript in his hands.",
+    "roles": [
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-4050.jpg"
   }
 ]

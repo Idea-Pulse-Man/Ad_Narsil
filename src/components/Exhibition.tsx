@@ -1,8 +1,14 @@
 import type { ComponentType } from "react";
 import { ROOM_NAMES, type RoomId } from "@/content/copy";
+import { Acquisitions } from "@/slides/Acquisitions";
+import { Ages } from "@/slides/Ages";
+import { Assessment } from "@/slides/Assessment";
 import { Doors } from "@/slides/Doors";
 import { Entrance } from "@/slides/Entrance";
-import { Acquisitions, Ages, Assessment, Gallery, Guild, Ladder, Placard } from "@/slides/rooms";
+import { Gallery } from "@/slides/Gallery";
+import { Guild } from "@/slides/Guild";
+import { Ladder } from "@/slides/Ladder";
+import { Placard } from "@/slides/Placard";
 import { ExhibitionController } from "./ExhibitionController";
 import { Faq } from "./Faq";
 import { Footer } from "./Footer";
