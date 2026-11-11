@@ -106,6 +106,8 @@ export const COPY = {
       { action: "Press and hold", result: "hide everything but the art" },
     ],
     small: "Like, save to your Vault, comment or download from the side rail.",
+    wallLabel: `A few of the ${SITE.catalogLabel} works in the feed`,
+    pause: "Hover or focus the wall to pause it.",
   },
 
   placard: {
@@ -113,6 +115,18 @@ export const COPY = {
     sub: "Tap a title and the placard rises: who made it, when and where, and why it still matters.",
     source:
       "Images and records from the open-access collections of the Met, the Rijksmuseum, the Cleveland Museum of Art and Wellcome Collection.",
+    /** The placard shown on the page: the app's text for this work, which is the museum's own description. */
+    featured: {
+      slug: "van-gogh-plane-trees",
+      label: "Placard",
+      story:
+        "Vincent van Gogh painted this autumnal landscape while living in a psychiatric hospital near Saint-Rémy in southern France, where he was treated for severe depression. Understanding that painting from nature eased his symptoms, Van Gogh’s physician permitted the artist to paint landscapes outside.",
+      quote:
+        "There are heaps of sand, stones, and the gigantic trunks—the leaves yellowing and here and there you can get a glimpse of a house front and small figures.",
+      quoteBy: "Van Gogh, in a letter to his brother Theo",
+      storySource: "Text from the museum",
+    },
+    more: "More stories in the feed",
   },
 
   ages: {
@@ -120,6 +134,20 @@ export const COPY = {
     sub: "Discover walks you through art history, age by age and empire by empire, with the artists and works that defined each one.",
     small:
       "Discover is free with an account. Ancient Egypt's trials are free for everyone; every other age and empire comes with The Explorer's Guild.",
+    /** Seven ages; Modern Art and Contemporary are left out on purpose (few public-domain works). */
+    eras: [
+      { id: "egypt", name: "Ancient Egypt", years: "3100–30 BC", line: "Art made to last forever." },
+      { id: "antiquity", name: "Greek & Roman Antiquity", years: "800 BC–AD 400", line: "Balance, proportion and the human form." },
+      { id: "medieval", name: "Medieval & Byzantine", years: "400–1400", line: "A thousand years of faith in gold and light." },
+      { id: "renaissance", name: "Renaissance", years: "1400–1600", line: "Perspective, anatomy and luminous oil." },
+      { id: "baroque", name: "Baroque & Dutch Golden Age", years: "1600–1750", line: "Drama, shadow and quiet Dutch rooms." },
+      { id: "romantic", name: "Romanticism & Edo", years: "1750–1850", line: "Sublime storms and Hokusai's waves." },
+      { id: "modern", name: "Modern Masters", years: "1850–1910", line: "Light, colour and the birth of modern art." },
+    ],
+    trials: "3 trials · Apprentice · Scholar · Master",
+    trackLabel: "Seven ages of art",
+    prev: "Previous age",
+    next: "Next age",
   },
 
   assessment: {
@@ -128,12 +156,39 @@ export const COPY = {
     /** Appended to sub once the on-page quiz ships (step 2). */
     tryNow: "Try five now.",
     small: "Sample questions. The app's Assessment is new every day.",
+    sample: {
+      label: "Sample question",
+      who: {
+        prompt: "Who painted this?",
+        slug: "cezanne-sainte-victoire",
+        options: ["Vincent van Gogh", "Claude Monet", "Paul Cézanne", "Paul Gauguin"],
+        answer: 2,
+        fact: "Cézanne painted this mountain near his home in Aix-en-Provence again and again, in oil and watercolour, for more than twenty years.",
+      },
+      older: {
+        prompt: "Which is older?",
+        slugs: ["hokusai-south-wind", "lippi-holy-family"],
+        answer: 1,
+        fact: "Filippino Lippi's Holy Family is about 340 years older than Hokusai's Red Fuji.",
+      },
+      right: "Correct.",
+      wrong: "Not quite.",
+      next: "Next question",
+      finish: "Hear the verdict",
+      doneTitle: "The court has seen enough… for now.",
+      doneSub: `In the app the court asks ${numberWord(SITE.dailyQuestions)} new questions every day, and keeps your score.`,
+      cta: "Play today's Assessment in the app",
+      again: "Try again",
+      score: (n: number, total: number) => `${n} / ${total}`,
+    },
   },
 
   ladder: {
     title: "Rise from Peasant to Royal Archivist.",
     sub: "Daily points lift you through seven ranks, each with its own heraldic frame. Perfect trials earn Seals. The Halls rank you against members at your level.",
     small: "Want a nudge? Turn on the daily reminder and keep your streak alive.",
+    ranks: ["Peasant", "Scholar", "Archivist", "Master Archivist", "Grand Archivist", "High Archivist", "Royal Archivist"],
+    ladderLabel: "The seven ranks, each in its heraldic frame",
   },
 
   acquisitions: {
@@ -142,6 +197,8 @@ export const COPY = {
     cta: "Choose yours in the app",
     small:
       "Ordered in the app with Apple Pay or card. Some works cost a few dollars more; the app shows the exact price before you pay.",
+    wallLabel: "A few of the works you can order as canvas or poster",
+    formats: "Canvas · Poster",
   },
 
   guild: {
@@ -150,6 +207,21 @@ export const COPY = {
     small:
       "The Explorer's Guild is an auto-renewing subscription billed to your Apple Account. The app shows the price before you subscribe. Cancel anytime in Settings.",
     cta: "Download free, join the Guild anytime",
+    perks: [
+      {
+        title: "Uncharted Archives",
+        body: "Practice without limits. Free members get five questions a round; the Guild plays as long as you keep answering.",
+      },
+      {
+        title: "Every trial",
+        body: "Every age and empire trial beyond Ancient Egypt, and the Seals that come with them.",
+      },
+      {
+        title: "Master Files",
+        body: "Download the largest file the museum publishes. Free downloads stop at 2,000 px.",
+      },
+    ],
+    loupe: "Detail",
   },
 
   doors: {
@@ -158,6 +230,7 @@ export const COPY = {
       ? "Narsil is coming to iPhone, free. Your first masterpiece is one swipe away."
       : "Narsil is free on iPhone. Your first masterpiece is one swipe away.",
     note: prelaunch ? "Coming soon to the App Store · Free to download" : "No account needed to start.",
+    ribbonLabel: "Works waiting inside",
   },
 
   faq: {

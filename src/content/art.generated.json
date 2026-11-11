@@ -86,5 +86,951 @@
       "960": "/art/red-kerchief-960.4c10a10e.webp",
       "1600": "/art/red-kerchief-1600.2c9e3bd8.webp"
     }
+  },
+  "coffin-of-bakenmut": {
+    "width": 2810,
+    "height": 3400,
+    "palette": [
+      "#161717",
+      "#382d20",
+      "#7b653f",
+      "#9d7946",
+      "#a78d66"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAwCdASoQABMAPu1iqk2ppaQiMAgBMB2JQBOgBDv61yNFMNN7g4AA/uzZLfjpNNlziFs4dtd8l7gGhvQF2b9iCkelvTncRoQ0fNkfCTgpP41ahEAAAA==",
+    "avif": {
+      "480": "/art/coffin-of-bakenmut-480.26f334a8.avif",
+      "960": "/art/coffin-of-bakenmut-960.a4ddb312.avif"
+    },
+    "webp": {
+      "480": "/art/coffin-of-bakenmut-480.55979d10.webp",
+      "960": "/art/coffin-of-bakenmut-960.7d626917.webp"
+    }
+  },
+  "amenhotep-iii-blue-crown": {
+    "width": 3003,
+    "height": 3400,
+    "palette": [
+      "#646363",
+      "#938880",
+      "#b3b3b3",
+      "#2c241d",
+      "#624d41"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAwCdASoQABIAPu1iqk4ppaQiMAgBMB2JZwC/OCHhI2SvZ7DkjoaAAP4hg+IWm3/p9GRbiT8vjaaFzGIVO2Xb1jDgAA==",
+    "avif": {
+      "480": "/art/amenhotep-iii-blue-crown-480.8b9ecd78.avif",
+      "960": "/art/amenhotep-iii-blue-crown-960.f2d432e8.avif"
+    },
+    "webp": {
+      "480": "/art/amenhotep-iii-blue-crown-480.cbcb0c4a.webp",
+      "960": "/art/amenhotep-iii-blue-crown-960.8db0055e.webp"
+    }
+  },
+  "head-of-userkaf": {
+    "width": 2758,
+    "height": 3400,
+    "palette": [
+      "#676664",
+      "#afafaf",
+      "#c8c6c2",
+      "#8c8882",
+      "#b39f87"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAwCdASoQABQAPu1kqU4ppaOiMAgBMB2JZwDImB5jpLYjj9KqgAD+Ise9aay6FzkZw0gUTpSTMA912nEsAAAA",
+    "avif": {
+      "480": "/art/head-of-userkaf-480.174b3f21.avif",
+      "960": "/art/head-of-userkaf-960.df5b2ec1.avif"
+    },
+    "webp": {
+      "480": "/art/head-of-userkaf-480.b1ae3121.webp",
+      "960": "/art/head-of-userkaf-960.f64bb72a.webp"
+    }
+  },
+  "athena-lekythos": {
+    "width": 2448,
+    "height": 3400,
+    "palette": [
+      "#575656",
+      "#87766d",
+      "#959595",
+      "#201b18",
+      "#44352c"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoQABYAPu1iqU2ppaOiMAgBMB2JZQAAUlfSKhtZje0oAP7ad0zF8zHonT4zeCjamch27pWQv/DRauEe2x47//m1goc4kwAA",
+    "avif": {
+      "480": "/art/athena-lekythos-480.33bcc05e.avif",
+      "960": "/art/athena-lekythos-960.5cef914c.avif"
+    },
+    "webp": {
+      "480": "/art/athena-lekythos-480.3257bc02.webp",
+      "960": "/art/athena-lekythos-960.1f5e22f3.webp"
+    }
+  },
+  "fayum-portrait-woman": {
+    "width": 2681,
+    "height": 3400,
+    "palette": [
+      "#614e37",
+      "#c1b6a2",
+      "#a66a2e",
+      "#a57746",
+      "#a99678"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABwBACdASoQABQAPu1iqk2ppaQiMAgBMB2JZACdMoR3ACqygol8Q2hnpz0LgADiKqROmBvpMVaT9vMAOUjksO2Lx/0urgLk9ottyNegFPpGhQdAAAA=",
+    "avif": {
+      "480": "/art/fayum-portrait-woman-480.67e34cbe.avif",
+      "960": "/art/fayum-portrait-woman-960.b7d12750.avif"
+    },
+    "webp": {
+      "480": "/art/fayum-portrait-woman-480.35bca0b9.webp",
+      "960": "/art/fayum-portrait-woman-960.7e091924.webp"
+    }
+  },
+  "akotantos-icon": {
+    "width": 2488,
+    "height": 3400,
+    "palette": [
+      "#5b311b",
+      "#7d5c38",
+      "#9c7340",
+      "#9b7c54",
+      "#908d8a"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQBACdASoQABYAPu1kqk4ppaQiMAgBMB2JYgCdMoAC8dtd+RY8h8JjAmeAAPU3UXwLZulOwdTXXtMzi2wqITeLswxx55XDFVKK17iS4WZQoa4gA8i5DEwyRgAAAA==",
+    "avif": {
+      "480": "/art/akotantos-icon-480.83637f2c.avif",
+      "960": "/art/akotantos-icon-960.c7c9b835.avif"
+    },
+    "webp": {
+      "480": "/art/akotantos-icon-480.347c6902.webp",
+      "960": "/art/akotantos-icon-960.e6da1a68.webp"
+    }
+  },
+  "lochner-virgin-angels": {
+    "width": 1960,
+    "height": 3400,
+    "palette": [
+      "#2f221c",
+      "#7c3219",
+      "#6e563d",
+      "#856e43",
+      "#9b816b"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQBACdASoQABwAPu1iqU2ppaOiMAgBMB2JZACsACHhph/jnBvGo9YjQAD+7pN6yftR+7fQ1nLQMAk8uzldWnenE/ZjcYcjoZJdPydpWv0S8TU2IkXAjAAA",
+    "avif": {
+      "480": "/art/lochner-virgin-angels-480.5853b791.avif",
+      "960": "/art/lochner-virgin-angels-960.4c18041a.avif"
+    },
+    "webp": {
+      "480": "/art/lochner-virgin-angels-480.5632d893.webp",
+      "960": "/art/lochner-virgin-angels-960.1302c918.webp"
+    }
+  },
+  "byzantine-ivory": {
+    "width": 2461,
+    "height": 3400,
+    "palette": [
+      "#6a6257",
+      "#a18a6d",
+      "#9f988e",
+      "#b9a486",
+      "#c0b6a7"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABQAwCdASoQABYAPu1kqk4ppaQiMAgBMB2JYwCdMoADTJv6AAD6WzD3z8ahC6IyNnf9ZS+nBygC0l6h5wesuZWcgAA=",
+    "avif": {
+      "480": "/art/byzantine-ivory-480.da5bf2d6.avif",
+      "960": "/art/byzantine-ivory-960.40256cea.avif"
+    },
+    "webp": {
+      "480": "/art/byzantine-ivory-480.89fd184a.webp",
+      "960": "/art/byzantine-ivory-960.7652fd05.webp"
+    }
+  },
+  "lippi-holy-family": {
+    "width": 3400,
+    "height": 3400,
+    "palette": [
+      "#6d5336",
+      "#646d77",
+      "#b9baba",
+      "#986846",
+      "#9d9182"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoQABAAA4BaJQBOgBg9yQ4AAPOwuAMQja48rtwwL6AwwQwuHQLwjFXQAAA=",
+    "avif": {
+      "480": "/art/lippi-holy-family-480.aa891945.avif",
+      "960": "/art/lippi-holy-family-960.8d3a386c.avif"
+    },
+    "webp": {
+      "480": "/art/lippi-holy-family-480.0f8bb50c.webp",
+      "960": "/art/lippi-holy-family-960.653049b3.webp"
+    }
+  },
+  "bronzino-woman": {
+    "width": 2647,
+    "height": 3400,
+    "palette": [
+      "#3b3233",
+      "#69534d",
+      "#7f6d6a",
+      "#b99f93",
+      "#c1bbb4"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQBACdASoQABUAPu1mqk2ppaQiMAgBMB2JZQC7MoADTrQuxudJfi7wIAD+b1f9PsCfKgbHtIRuePQVvam/yLu5eM6nnDgoIBAcbI8a8AA=",
+    "avif": {
+      "480": "/art/bronzino-woman-480.e28b3c29.avif",
+      "960": "/art/bronzino-woman-960.c3099c03.avif"
+    },
+    "webp": {
+      "480": "/art/bronzino-woman-480.db69caa2.webp",
+      "960": "/art/bronzino-woman-960.f8d66a1e.webp"
+    }
+  },
+  "cranach-hartenfels": {
+    "width": 3400,
+    "height": 2332,
+    "palette": [
+      "#1e1f1d",
+      "#514a1e",
+      "#484f45",
+      "#7f6a42",
+      "#908e82"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACwAQCdASoQAAsAA4BaJQBdgBBtQajwAP7y51BL8DZJstDRwf4upqsVY1+SEi2X5pe7IqwAAAA=",
+    "avif": {
+      "480": "/art/cranach-hartenfels-480.a9090a72.avif",
+      "960": "/art/cranach-hartenfels-960.924b830f.avif"
+    },
+    "webp": {
+      "480": "/art/cranach-hartenfels-480.774ec3f7.webp",
+      "960": "/art/cranach-hartenfels-960.726999bc.webp"
+    }
+  },
+  "la-tour-saint-peter": {
+    "width": 2769,
+    "height": 3400,
+    "palette": [
+      "#121310",
+      "#24201a",
+      "#3c2a20",
+      "#553b2a",
+      "#82563f"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAwCdASoQABQAPu1kqU2ppaQiMAgBMB2JZwCdACHw1STlAQkpwAD+6+QbGArGcwmRGo8w8RaI3gYHjYtgAA==",
+    "avif": {
+      "480": "/art/la-tour-saint-peter-480.099a7035.avif",
+      "960": "/art/la-tour-saint-peter-960.fcd109aa.avif"
+    },
+    "webp": {
+      "480": "/art/la-tour-saint-peter-480.45675e2b.webp",
+      "960": "/art/la-tour-saint-peter-960.70367033.webp"
+    }
+  },
+  "turner-burning-parliament": {
+    "width": 3400,
+    "height": 2525,
+    "palette": [
+      "#55472f",
+      "#6e6b58",
+      "#9d8c68",
+      "#8b6840",
+      "#ae7e42"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAwAA4BaJZgCdADPIlQ7GAD3QY+YHBAVwshBQzVwpVzPtupshp3FDyWVaEA8AAA=",
+    "avif": {
+      "480": "/art/turner-burning-parliament-480.d8f25d45.avif",
+      "960": "/art/turner-burning-parliament-960.fc88507e.avif"
+    },
+    "webp": {
+      "480": "/art/turner-burning-parliament-480.f3e872e7.webp",
+      "960": "/art/turner-burning-parliament-960.df496a88.webp"
+    }
+  },
+  "hokusai-south-wind": {
+    "width": 3400,
+    "height": 2329,
+    "palette": [
+      "#8e9899",
+      "#be9c8a",
+      "#c0c0b8",
+      "#35435b",
+      "#586570"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADwAQCdASoQAAsAA4BaJYwCdAEO0VfFAAAA3lr47Kl4ioRIFtsjwDkMlA0B0zwAAAA=",
+    "avif": {
+      "480": "/art/hokusai-south-wind-480.fac29e4e.avif",
+      "960": "/art/hokusai-south-wind-960.96bfc502.avif"
+    },
+    "webp": {
+      "480": "/art/hokusai-south-wind-480.a089b010.webp",
+      "960": "/art/hokusai-south-wind-960.4e86201a.webp"
+    }
+  },
+  "hoitsu-paulownias": {
+    "width": 3400,
+    "height": 3264,
+    "palette": [
+      "#918b6c",
+      "#d9b779",
+      "#ead3ad",
+      "#434842",
+      "#64664f"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACwAQCdASoQAA8AA4BaJbACdADAZ36AAP7FfgFPSd7Y/YYrgUtqVEysDTjtTWevVLMnvlV6QAA=",
+    "avif": {
+      "480": "/art/hoitsu-paulownias-480.a7ff6b00.avif",
+      "960": "/art/hoitsu-paulownias-960.206bf502.avif"
+    },
+    "webp": {
+      "480": "/art/hoitsu-paulownias-480.bba12eba.webp",
+      "960": "/art/hoitsu-paulownias-960.62e8d0a1.webp"
+    }
+  },
+  "van-gogh-plane-trees": {
+    "width": 3400,
+    "height": 2713,
+    "palette": [
+      "#594f3d",
+      "#91784b",
+      "#9c977d",
+      "#6f684b",
+      "#6e7365"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjQAAABXRUJQVlA4ICgAAACwAQCdASoQAA0AA4BaJYgCdAEOLKgAAP4T455adpyCLcJsMIm/zDQA",
+    "avif": {
+      "480": "/art/van-gogh-plane-trees-480.7147c2d1.avif",
+      "960": "/art/van-gogh-plane-trees-960.a5c6a6d0.avif",
+      "1600": "/art/van-gogh-plane-trees-1600.6b42e28d.avif"
+    },
+    "webp": {
+      "480": "/art/van-gogh-plane-trees-480.d81f7d6f.webp",
+      "960": "/art/van-gogh-plane-trees-960.5c89c4f7.webp",
+      "1600": "/art/van-gogh-plane-trees-1600.bc78f5f5.webp"
+    }
+  },
+  "monet-water-lilies": {
+    "width": 3400,
+    "height": 1581,
+    "palette": [
+      "#4e5745",
+      "#676a5c",
+      "#6b6a78",
+      "#7e778a",
+      "#989297"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACwAQCdASoQAAcAA4BaJZQAAqHDSpeAAPC/0zBzO+o8+BTPHgAAAA==",
+    "avif": {
+      "480": "/art/monet-water-lilies-480.445623e4.avif",
+      "960": "/art/monet-water-lilies-960.9d6bf83e.avif",
+      "1600": "/art/monet-water-lilies-1600.34c58ec4.avif"
+    },
+    "webp": {
+      "480": "/art/monet-water-lilies-480.d898c80c.webp",
+      "960": "/art/monet-water-lilies-960.7617e47e.webp",
+      "1600": "/art/monet-water-lilies-1600.2fe81d36.webp"
+    }
+  },
+  "cezanne-sainte-victoire": {
+    "width": 3400,
+    "height": 2697,
+    "palette": [
+      "#516b66",
+      "#6192ad",
+      "#92a1a6",
+      "#8b8673",
+      "#c7926d"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoQAA0AA4BaJZgCdAEQ7T3UHADv3nBAlsJ0ovzFVIRZf/07lsNd+Qz5AAA=",
+    "avif": {
+      "480": "/art/cezanne-sainte-victoire-480.90a09e4c.avif",
+      "960": "/art/cezanne-sainte-victoire-960.69d95486.avif",
+      "1600": "/art/cezanne-sainte-victoire-1600.0077435d.avif"
+    },
+    "webp": {
+      "480": "/art/cezanne-sainte-victoire-480.fa31c59e.webp",
+      "960": "/art/cezanne-sainte-victoire-960.f4a005bf.webp",
+      "1600": "/art/cezanne-sainte-victoire-1600.61057432.webp"
+    }
+  },
+  "church-twilight": {
+    "width": 3400,
+    "height": 2123,
+    "palette": [
+      "#292018",
+      "#50281e",
+      "#5e3b2d",
+      "#715b43",
+      "#bc954e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoQAAoAA4BaJQBOgCHheFbs4AD+7EFCbct9LJxcWwOBpQ7t/+JJzeXgAAA=",
+    "avif": {
+      "480": "/art/church-twilight-480.68ab2d65.avif",
+      "960": "/art/church-twilight-960.7a39cc10.avif"
+    },
+    "webp": {
+      "480": "/art/church-twilight-480.2e37abd2.webp",
+      "960": "/art/church-twilight-960.c8281d6e.webp"
+    }
+  },
+  "de-hooch-music": {
+    "width": 3400,
+    "height": 2867,
+    "palette": [
+      "#120b07",
+      "#271e18",
+      "#512715",
+      "#4d362a",
+      "#545a59"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAAAQAgCdASoQAA0AA4BaJZQCdAEPDnJx3BAAAP72uGHzNEBHu4R2h2vbW6AAAA==",
+    "avif": {
+      "480": "/art/de-hooch-music-480.3369b916.avif",
+      "960": "/art/de-hooch-music-960.855537e8.avif"
+    },
+    "webp": {
+      "480": "/art/de-hooch-music-480.61d7488a.webp",
+      "960": "/art/de-hooch-music-960.cbb593c5.webp"
+    }
+  },
+  "manet-morisot": {
+    "width": 2744,
+    "height": 3400,
+    "palette": [
+      "#302317",
+      "#443019",
+      "#52412a",
+      "#6a573b",
+      "#8f7957"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JZQCw7CHgAFaMxJN2oeuMAAD+6M96s+WFGwMYCiQ8Y7ULi/qEBQZzbQKk9AAA",
+    "avif": {
+      "480": "/art/manet-morisot-480.c8339eae.avif",
+      "960": "/art/manet-morisot-960.168f4d48.avif"
+    },
+    "webp": {
+      "480": "/art/manet-morisot-480.c40c6175.webp",
+      "960": "/art/manet-morisot-960.4bdc42ff.webp"
+    }
+  },
+  "corot-cervara": {
+    "width": 3400,
+    "height": 2438,
+    "palette": [
+      "#585042",
+      "#6a89a0",
+      "#928875",
+      "#88a6b8",
+      "#aebebe"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoQAAsAA4BaJQBOgBPK8KggAMqSFYjtRdddN9Xdon0JvxloGuSqMOueTAA=",
+    "avif": {
+      "480": "/art/corot-cervara-480.145efba5.avif",
+      "960": "/art/corot-cervara-960.7ac5a699.avif"
+    },
+    "webp": {
+      "480": "/art/corot-cervara-480.159cc62a.webp",
+      "960": "/art/corot-cervara-960.f3f09702.webp"
+    }
+  },
+  "van-beyeren-still-life": {
+    "width": 2829,
+    "height": 3400,
+    "palette": [
+      "#151210",
+      "#2c221c",
+      "#3c3226",
+      "#5b4029",
+      "#736a58"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAABQAwCdASoQABMAPu1iqU2ppaOiMAgBMB2JZwC/OCHfQsQFsAD+8Lz2ia/S29DdJxVPU7t2P38oyUdwf1pqycAA",
+    "avif": {
+      "480": "/art/van-beyeren-still-life-480.b5200cf2.avif",
+      "960": "/art/van-beyeren-still-life-960.7067a828.avif"
+    },
+    "webp": {
+      "480": "/art/van-beyeren-still-life-480.19739e7f.webp",
+      "960": "/art/van-beyeren-still-life-960.f1adeb99.webp"
+    }
+  },
+  "bierstadt-starr-king": {
+    "width": 3400,
+    "height": 2303,
+    "palette": [
+      "#37342c",
+      "#5e5130",
+      "#6c6a69",
+      "#777a81",
+      "#a9a59c"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAAAQAgCdASoQAAsAA4BaJZAC/OEXwIPt1NwAAP4fldYxwTzIFJAj++E/VvlwsLjcAAA=",
+    "avif": {
+      "480": "/art/bierstadt-starr-king-480.f5ab9d88.avif",
+      "960": "/art/bierstadt-starr-king-960.f4be902a.avif"
+    },
+    "webp": {
+      "480": "/art/bierstadt-starr-king-480.a56d5aa1.webp",
+      "960": "/art/bierstadt-starr-king-960.fd048629.webp"
+    }
+  },
+  "degas-stefanina": {
+    "width": 2707,
+    "height": 3400,
+    "palette": [
+      "#110b0c",
+      "#3b2820",
+      "#583929",
+      "#6d553f",
+      "#81664b"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABwAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JZQC7AB6RmhLjOwAA/i3qAq34aamz52beUjieKfHtAML8Jd8AAA==",
+    "avif": {
+      "480": "/art/degas-stefanina-480.c7c0c2d9.avif",
+      "960": "/art/degas-stefanina-960.6eea24a9.avif"
+    },
+    "webp": {
+      "480": "/art/degas-stefanina-480.a62c6cdc.webp",
+      "960": "/art/degas-stefanina-960.f28f3037.webp"
+    }
+  },
+  "shah-jahan": {
+    "width": 2544,
+    "height": 3400,
+    "palette": [
+      "#393526",
+      "#65684e",
+      "#e3cca9",
+      "#b58961",
+      "#ccaa8c"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQBACdASoQABUAPu1iqk4ppaQiMAgBMB2JQBOmUABwRK8eZCe3zULZwAD+mTZsE8oo3lhjkFLVzGxO/t64K0kY9yMzeXNu3HzGdzR0Cf1lcOR07sQ0y7Aspd09VvNAAAA=",
+    "avif": {
+      "480": "/art/shah-jahan-480.55fe8d71.avif",
+      "960": "/art/shah-jahan-960.44dcb545.avif"
+    },
+    "webp": {
+      "480": "/art/shah-jahan-480.25afe569.webp",
+      "960": "/art/shah-jahan-960.aa4b585f.webp"
+    }
+  },
+  "van-dyck-genoese-lady": {
+    "width": 2265,
+    "height": 3400,
+    "palette": [
+      "#37281f",
+      "#662a1f",
+      "#6d4a36",
+      "#695e4d",
+      "#806f5a"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAwCdASoQABgAPu1mqk4ppaOiMAgBMB2JQBOmUABpxWEm+loPggAA/t0GvoLvwe2W6NxVBX/dk9ZCkr+AidlDs/is4bWMiAAAAA==",
+    "avif": {
+      "480": "/art/van-dyck-genoese-lady-480.7097e48b.avif",
+      "960": "/art/van-dyck-genoese-lady-960.84a9d866.avif"
+    },
+    "webp": {
+      "480": "/art/van-dyck-genoese-lady-480.84ed7d60.webp",
+      "960": "/art/van-dyck-genoese-lady-960.a0288aee.webp"
+    }
+  },
+  "fish-plate": {
+    "width": 3400,
+    "height": 2907,
+    "palette": [
+      "#423d38",
+      "#8c5d43",
+      "#7c736a",
+      "#9d8878",
+      "#a69c91"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAAAQAgCdASoQAA4AA4BaJQBOgB6XSyJZgVwAAP658rW7YujHL8cZX1VYg8PIdf+gAAA=",
+    "avif": {
+      "480": "/art/fish-plate-480.cdcbbaf1.avif",
+      "960": "/art/fish-plate-960.a65be041.avif"
+    },
+    "webp": {
+      "480": "/art/fish-plate-480.9e44d788.webp",
+      "960": "/art/fish-plate-960.15599726.webp"
+    }
+  },
+  "turner-queen-mab": {
+    "width": 3400,
+    "height": 2792,
+    "palette": [
+      "#52462f",
+      "#807856",
+      "#889383",
+      "#a49a72",
+      "#b4b593"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAA0AA4BaJQBOgBl5GTLRMAAA/mj1MZ+43S9udsDr8I8MQI3uZ8HWlZAAAA==",
+    "avif": {
+      "480": "/art/turner-queen-mab-480.c26427fe.avif",
+      "960": "/art/turner-queen-mab-960.ae1782a1.avif"
+    },
+    "webp": {
+      "480": "/art/turner-queen-mab-480.93f451cc.webp",
+      "960": "/art/turner-queen-mab-960.b39f1265.webp"
+    }
+  },
+  "courbet-alps": {
+    "width": 3400,
+    "height": 2428,
+    "palette": [
+      "#353f3a",
+      "#c4d4ce",
+      "#5e6754",
+      "#879f9a",
+      "#b3c2bb"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAsAA4BaJZQC7AEOqParAAD+56c8L9jvxF7/YDDXa6PSQgAAAA==",
+    "avif": {
+      "480": "/art/courbet-alps-480.95ac9d36.avif",
+      "960": "/art/courbet-alps-960.09bd76b0.avif"
+    },
+    "webp": {
+      "480": "/art/courbet-alps-480.a662f8d1.webp",
+      "960": "/art/courbet-alps-960.a3f3070f.webp"
+    }
+  },
+  "renoir-romaine-lacaux": {
+    "width": 2706,
+    "height": 3400,
+    "palette": [
+      "#63615a",
+      "#83807a",
+      "#aaa9a5",
+      "#2c251e",
+      "#524235"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABwAwCdASoQABQAPu1mq04ppaQiMAgBMB2JZwDG9A2a5uBF7QAAnrD/HxLsuyXJ5JMshndnWhPWtndGywoTgxA2xcCBSMTsAAA=",
+    "avif": {
+      "480": "/art/renoir-romaine-lacaux-480.69c2bb17.avif",
+      "960": "/art/renoir-romaine-lacaux-960.20515079.avif"
+    },
+    "webp": {
+      "480": "/art/renoir-romaine-lacaux-480.89b88f35.webp",
+      "960": "/art/renoir-romaine-lacaux-960.e218d677.webp"
+    }
+  },
+  "gainsborough-mary-wise": {
+    "width": 2815,
+    "height": 3400,
+    "palette": [
+      "#2b2721",
+      "#514539",
+      "#c3b8a9",
+      "#7d7769",
+      "#9d8f7a"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAwBACdASoQABMAPu1mq04ppaQiMAgBMB2JZwDE2BuDRiqiWMYPn2G0EYAA/umF+pmkgqlZdvLaaIXjdfBULy+aISuZCDHD5DWeeDqgAAA=",
+    "avif": {
+      "480": "/art/gainsborough-mary-wise-480.da8abbec.avif",
+      "960": "/art/gainsborough-mary-wise-960.4c52e9bb.avif"
+    },
+    "webp": {
+      "480": "/art/gainsborough-mary-wise-480.1f9d0746.webp",
+      "960": "/art/gainsborough-mary-wise-960.1a417376.webp"
+    }
+  },
+  "hokusai-sanjo": {
+    "width": 3400,
+    "height": 2315,
+    "palette": [
+      "#686b5b",
+      "#947e66",
+      "#b8aa94",
+      "#27393c",
+      "#51433a"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoQAAsAA4BaJQBOgCHnWSy4BgAA/VLA8nyYpfByZuajDs2kPWfoAAAA",
+    "avif": {
+      "480": "/art/hokusai-sanjo-480.195a4f3a.avif",
+      "960": "/art/hokusai-sanjo-960.3e4b3735.avif"
+    },
+    "webp": {
+      "480": "/art/hokusai-sanjo-480.85a91932.webp",
+      "960": "/art/hokusai-sanjo-960.ef09f821.webp"
+    }
+  },
+  "rembrandt-bearded-man": {
+    "width": 2778,
+    "height": 3400,
+    "palette": [
+      "#241f17",
+      "#33281c",
+      "#473624",
+      "#58422b",
+      "#684d2f"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAgCdASoQABQAPu1iqU2ppaOiMAgBMB2JZWhNADgCAAD+7oe/e70I/DTubivz0QEr7/RievvQUAAA",
+    "avif": {
+      "480": "/art/rembrandt-bearded-man-480.3df65858.avif",
+      "960": "/art/rembrandt-bearded-man-960.8e536caf.avif"
+    },
+    "webp": {
+      "480": "/art/rembrandt-bearded-man-480.c3d10513.webp",
+      "960": "/art/rembrandt-bearded-man-960.fe61ce4f.webp"
+    }
+  },
+  "hals-roosterman": {
+    "width": 2529,
+    "height": 3400,
+    "palette": [
+      "#0b0b0a",
+      "#2c271c",
+      "#4a3e24",
+      "#514831",
+      "#8d846d"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACQAwCdASoQABYAPu1iqU2ppaOmMAgBMB2JZQDCgBugs/R0RUGAAP7o8PNVH/lXrJUt3TXaQNEpafMWF7oAAAAA",
+    "avif": {
+      "480": "/art/hals-roosterman-480.faea6835.avif",
+      "960": "/art/hals-roosterman-960.72a1021b.avif"
+    },
+    "webp": {
+      "480": "/art/hals-roosterman-480.8e17c6bc.webp",
+      "960": "/art/hals-roosterman-960.3cb32ec0.webp"
+    }
+  },
+  "aved-du-theil": {
+    "width": 2497,
+    "height": 3400,
+    "palette": [
+      "#2c1f15",
+      "#503d26",
+      "#735f3d",
+      "#997342",
+      "#a8926c"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABQBACdASoQABYAPu1kqU2ppaQiMAgBMB2JQBOmUABoYjo6uDQVDkx69wUAAP7uiFYMRFXoVZ+beQXqAaF53ikwStfPDrtP8JF/yzShHP+LuI2OgU04AAAA",
+    "avif": {
+      "480": "/art/aved-du-theil-480.07921af4.avif",
+      "960": "/art/aved-du-theil-960.98272144.avif"
+    },
+    "webp": {
+      "480": "/art/aved-du-theil-480.ba333004.webp",
+      "960": "/art/aved-du-theil-960.f876405a.webp"
+    }
+  },
+  "rigaud-dubois": {
+    "width": 2640,
+    "height": 3400,
+    "palette": [
+      "#2a1304",
+      "#722501",
+      "#802f0c",
+      "#846446",
+      "#c2baa4"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYgCdMoADTqI8T3eTefQtyegA/vDIs1gpLAPpB5ahHr0cGEUYYCetNPV7STxUMytIuTJo7aiX5q8oF9lXAAAA",
+    "avif": {
+      "480": "/art/rigaud-dubois-480.3c29aec4.avif",
+      "960": "/art/rigaud-dubois-960.45f5dd4c.avif"
+    },
+    "webp": {
+      "480": "/art/rigaud-dubois-480.2d52e0a1.webp",
+      "960": "/art/rigaud-dubois-960.51cd4a51.webp"
+    }
+  },
+  "berruguete-sixtus-iv": {
+    "width": 2385,
+    "height": 3400,
+    "palette": [
+      "#50371f",
+      "#565238",
+      "#7c5d35",
+      "#898a5b",
+      "#b69c60"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAwCdASoQABcAPu1kqk4ppaQiMAgBMB2JQBWABBamaN1u1Ddc1AAA/naQ3nrp2v+Nh/R60U1WVp3Uxl4h/uz3bJPflwXu6oeM3ZU85bc9ccAvBFLcHgAA",
+    "avif": {
+      "480": "/art/berruguete-sixtus-iv-480.9ed74993.avif",
+      "960": "/art/berruguete-sixtus-iv-960.6dd7943c.avif"
+    },
+    "webp": {
+      "480": "/art/berruguete-sixtus-iv-480.2076e0b0.webp",
+      "960": "/art/berruguete-sixtus-iv-960.d8f3a17b.webp"
+    }
+  },
+  "pourbus-louis-xiii": {
+    "width": 2016,
+    "height": 3400,
+    "palette": [
+      "#1c2515",
+      "#26361f",
+      "#5d372c",
+      "#766044",
+      "#9f856e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACQAwCdASoQABsAPu1krU2ppaSiMAgBMB2JQBOgBDvZhp2N2wDAAP7owHSCwzkdmk7tHepQSlMH9z7UMG9DszEhD8htaFYkeTyuup6xacz+A0AA",
+    "avif": {
+      "480": "/art/pourbus-louis-xiii-480.89befe37.avif",
+      "960": "/art/pourbus-louis-xiii-960.573b1433.avif"
+    },
+    "webp": {
+      "480": "/art/pourbus-louis-xiii-480.f03b5062.webp",
+      "960": "/art/pourbus-louis-xiii-960.1b40b29f.webp"
+    }
+  },
+  "night-watch": {
+    "width": 843,
+    "height": 700,
+    "palette": [
+      "#1a110d",
+      "#2b1d12",
+      "#3d2b18",
+      "#5a3c1e",
+      "#8f6f3e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAQCdASoQAA0AA4BaJQBOgCHflCLQAAD+93bSV5FpDXfW3DU7fVgAAAA=",
+    "avif": {
+      "480": "/art/night-watch-480.27c3def1.avif",
+      "843": "/art/night-watch-843.aea8a84c.avif"
+    },
+    "webp": {
+      "480": "/art/night-watch-480.33624e8e.webp",
+      "843": "/art/night-watch-843.e54ef95a.webp"
+    }
+  },
+  "little-street": {
+    "width": 843,
+    "height": 1031,
+    "palette": [
+      "#3d2f25",
+      "#624e3d",
+      "#b3ab93",
+      "#7e5c44",
+      "#948b78"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAwCdASoQABQAPu1iqk2ppaQiMAgBMB2JYwCw7BeRGuGNPOdX+AAA/FppeUSzioVqrstHJnHOsXTnh81tbWjVr8EwZBPNFdyYAA==",
+    "avif": {
+      "480": "/art/little-street-480.755f0e3f.avif",
+      "843": "/art/little-street-843.0da681ca.avif"
+    },
+    "webp": {
+      "480": "/art/little-street-480.d7fcc3d9.webp",
+      "843": "/art/little-street-843.c08474e7.webp"
+    }
+  },
+  "threatened-swan": {
+    "width": 843,
+    "height": 701,
+    "palette": [
+      "#313429",
+      "#60543c",
+      "#878469",
+      "#a49b78",
+      "#beb594"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAA0AA4BaJQBdgCHwCuYdCAAA/uXm9Gm+1s2h3TuGrGx5J40Pg9iy1+BGAAAA",
+    "avif": {
+      "480": "/art/threatened-swan-480.ca01877b.avif",
+      "843": "/art/threatened-swan-843.3d131dbf.avif"
+    },
+    "webp": {
+      "480": "/art/threatened-swan-480.c03964cb.webp",
+      "843": "/art/threatened-swan-843.2179d9aa.webp"
+    }
+  },
+  "avercamp-skaters": {
+    "width": 843,
+    "height": 489,
+    "palette": [
+      "#948b6e",
+      "#b7ab89",
+      "#d5cdb1",
+      "#4f4a38",
+      "#776448"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoQAAkAA4BaJQBOgCEfxCkAAP6aWp34Yl/YN68bdwDnbcGyiwwl+74ZgAA=",
+    "avif": {
+      "480": "/art/avercamp-skaters-480.b2571002.avif",
+      "843": "/art/avercamp-skaters-843.353c6c3c.avif"
+    },
+    "webp": {
+      "480": "/art/avercamp-skaters-480.881a1d5d.webp",
+      "843": "/art/avercamp-skaters-843.47fa9484.webp"
+    }
+  },
+  "woman-reading-letter": {
+    "width": 843,
+    "height": 1007,
+    "palette": [
+      "#151a1c",
+      "#333e3d",
+      "#636149",
+      "#8d9fa4",
+      "#cacfca"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAwCdASoQABMAPu1kqU2ppaQiMAgBMB2JZQAAUqoZvBp0MqXxuKNYAP7Tnk+eULWT2T127+YoOOT+r1217XGutQk8a28XB0QAAA==",
+    "avif": {
+      "480": "/art/woman-reading-letter-480.5af07403.avif",
+      "843": "/art/woman-reading-letter-843.bec1836a.avif"
+    },
+    "webp": {
+      "480": "/art/woman-reading-letter-480.846c6ecd.webp",
+      "843": "/art/woman-reading-letter-843.7799957c.webp"
+    }
+  },
+  "ruisdael-windmill": {
+    "width": 843,
+    "height": 715,
+    "palette": [
+      "#3d3323",
+      "#595a53",
+      "#8c9188",
+      "#796a50",
+      "#73766e"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAQCdASoQAA4AA4BaJYwC7ACZby/AAAD+offQAAphuidRNtYaibZ5MTVLMAAA",
+    "avif": {
+      "480": "/art/ruisdael-windmill-480.20ff6e8a.avif",
+      "843": "/art/ruisdael-windmill-843.0956333d.avif"
+    },
+    "webp": {
+      "480": "/art/ruisdael-windmill-480.9f42f821.webp",
+      "843": "/art/ruisdael-windmill-843.1c2a88d4.webp"
+    }
+  },
+  "jewish-bride": {
+    "width": 843,
+    "height": 614,
+    "palette": [
+      "#2b211a",
+      "#452d21",
+      "#5f3527",
+      "#783d2a",
+      "#9e7045"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAABwAQCdASoQAAwAA4BaJYgCdAFAAAD+8Dyl3G6b+xjBHZgXTOv8oLGCbR0T7H53dwAAAA==",
+    "avif": {
+      "480": "/art/jewish-bride-480.1aa4ea61.avif",
+      "843": "/art/jewish-bride-843.fb8e72cc.avif"
+    },
+    "webp": {
+      "480": "/art/jewish-bride-480.332bfe7a.webp",
+      "843": "/art/jewish-bride-843.a012be94.webp"
+    }
+  },
+  "rembrandt-apostle-paul": {
+    "width": 843,
+    "height": 997,
+    "palette": [
+      "#0e0d0a",
+      "#201810",
+      "#3b2e1d",
+      "#493722",
+      "#836640"
+    ],
+    "placeholder": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABwAwCdASoQABMAPu1iqU2ppaOiMAgBMB2JYwCdABtn1up0mYAA/tlZp2fNLQ7+vFMapaoLpgN6DJGg83DAAA==",
+    "avif": {
+      "480": "/art/rembrandt-apostle-paul-480.88d1b4a1.avif",
+      "843": "/art/rembrandt-apostle-paul-843.53b44a6b.avif"
+    },
+    "webp": {
+      "480": "/art/rembrandt-apostle-paul-480.cfc43c14.webp",
+      "843": "/art/rembrandt-apostle-paul-843.b985d59d.webp"
+    }
   }
 }

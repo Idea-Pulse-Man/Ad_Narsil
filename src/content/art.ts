@@ -29,6 +29,13 @@ export function artwork(slug: string): Artwork {
 
 export const artworksWithRole = (role: string) => ARTWORKS.filter((w) => w.roles.includes(role));
 
+/**
+ * The title as a caption can carry it: the museum's subtitles and series
+ * names dropped ("Red-Figure Lekythos (Oil Vessel): Athena…" → "Red-Figure Lekythos").
+ * Placards and /credits keep the full title.
+ */
+export const shortTitle = (work: Artwork) => work.title.split(/ \(|: |, from /)[0];
+
 export const srcSet = (set: Record<string, string>) =>
   Object.entries(set)
     .map(([w, src]) => `${src} ${w}w`)

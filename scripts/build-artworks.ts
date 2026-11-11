@@ -1,13 +1,15 @@
 /**
  * Builds the site's images.
  *
- * Artworks (src/content/artworks.json): downloads Narsil's own S3 copy
- * (cached in .cache/art), writes AVIF and WebP at 480/960/1600 px wide to
- * public/art with a content hash in the name, and records the size, a
- * 5-colour palette and a tiny blurred placeholder in
+ * Artworks (src/content/artworks.json): downloads each work's `imageUrl`
+ * (the museum's open-access file, or Narsil's own S3 copy; cached in
+ * .cache/art), writes AVIF and WebP at 480/960 px wide (plus 1600 for hero
+ * and "large" works) to public/art with a content hash in the name, and
+ * records the size, a 5-colour palette and a tiny blurred placeholder in
  * src/content/art.generated.json.
  *
  * Crest (assets/crest.png): writes the sizes the site uses to public/branding.
+ * Rank frames (assets/person-levels, from the app): writes WebP to public/ranks.
  *
  * Run: npm run artworks
  */
@@ -17,15 +19,18 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-type Manifest = { slug: string; imageUrl: string }[];
+type Manifest = { slug: string; imageUrl: string; roles: string[] }[];
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const CACHE = path.join(ROOT, ".cache", "art");
 const OUT = path.join(ROOT, "public", "art");
 // No layout shows an artwork wider than ~600 CSS px, so 1600 covers 2× screens;
-// a 2400 px set would add ~5 MB to the repo and never be picked.
+// a 2400 px set would add ~5 MB to the repo and never be picked. Most rooms show
+// works at thumbnail or card size, so only the hero and "large" works get 1600.
 const WIDTHS = [480, 960, 1600];
+const LARGE_ROLES = ["hero", "large"];
 const CREST_SIZES = [56, 112, 336];
+const RANK_SIZES = [320, 640];
 
 const hash = (buf: Buffer) => createHash("sha256").update(buf).digest("hex").slice(0, 8);
 const hex = (rgb: number[]) => "#" + rgb.map((v) => v.toString(16).padStart(2, "0")).join("");
@@ -33,8 +38,16 @@ const hex = (rgb: number[]) => "#" + rgb.map((v) => v.toString(16).padStart(2, "
 async function download(slug: string, url: string): Promise<Buffer> {
   const file = path.join(CACHE, `${slug}${path.extname(new URL(url).pathname) || ".jpg"}`);
   if (existsSync(file)) return readFile(file);
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`${slug}: ${res.status} from ${url}`);
+  let res: Response | undefined;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      res = await fetch(url, { signal: AbortSignal.timeout(60_000) });
+      if (res.ok || res.status < 500 || attempt === 3) break;
+    } catch (err) {
+      if (attempt === 3) throw new Error(`${slug}: ${String(err)} from ${url}`);
+    }
+  }
+  if (!res?.ok) throw new Error(`${slug}: ${res?.status} from ${url}`);
   const buf = Buffer.from(await res.arrayBuffer());
   await writeFile(file, buf);
   return buf;
@@ -77,7 +90,7 @@ async function palette(input: Buffer, count = 5): Promise<string[]> {
     .map((box) => hex([0, 1, 2].map((c) => Math.round(box.reduce((s, p) => s + p[c], 0) / box.length))));
 }
 
-async function buildArtwork(slug: string, url: string) {
+async function buildArtwork(slug: string, url: string, large: boolean) {
   const source = await download(slug, url);
   const { width = 0, height = 0 } = await sharp(source).metadata();
   for (const f of await readdir(OUT)) if (f.startsWith(`${slug}-`)) await rm(path.join(OUT, f));
@@ -85,7 +98,11 @@ async function buildArtwork(slug: string, url: string) {
   const avif: Record<number, string> = {};
   const webp: Record<number, string> = {};
   const report: string[] = [];
-  for (const w of WIDTHS.filter((w) => w <= width || w === WIDTHS[0])) {
+  const wanted = large ? WIDTHS : WIDTHS.slice(0, 2);
+  // Below the source width, plus the source width itself when it falls short of a step.
+  const widths = wanted.filter((w) => w <= width);
+  if (widths.length < wanted.length) widths.push(width);
+  for (const w of widths) {
     const resized = sharp(source).resize({ width: Math.min(w, width) });
     for (const [format, target] of [["avif", avif], ["webp", webp]] as const) {
       const buf =
@@ -122,10 +139,36 @@ async function buildCrest() {
   console.log(`crest: ${CREST_SIZES.join(", ")} px`);
 }
 
+async function buildRanks() {
+  const dir = path.join(ROOT, "public", "ranks");
+  await mkdir(dir, { recursive: true });
+  for (let level = 1; level <= 7; level++) {
+    const src = path.join(ROOT, "assets", "person-levels", `level-${level}.png`);
+    for (const size of RANK_SIZES) {
+      await sharp(src)
+        .resize(size, size)
+        .webp({ quality: 82, alphaQuality: 90 })
+        .toFile(path.join(dir, `level-${level}-${size}.webp`));
+    }
+  }
+  console.log(`rank frames: 7 × ${RANK_SIZES.join(", ")} px`);
+}
+
 await mkdir(CACHE, { recursive: true });
 await mkdir(OUT, { recursive: true });
 const manifest: Manifest = JSON.parse(await readFile(path.join(ROOT, "src", "content", "artworks.json"), "utf8"));
 const generated: Record<string, Awaited<ReturnType<typeof buildArtwork>>> = {};
-for (const work of manifest) generated[work.slug] = await buildArtwork(work.slug, work.imageUrl);
+for (const work of manifest) {
+  const large = work.roles.some((r) => LARGE_ROLES.includes(r));
+  generated[work.slug] = await buildArtwork(work.slug, work.imageUrl, large);
+}
 await writeFile(path.join(ROOT, "src", "content", "art.generated.json"), JSON.stringify(generated, null, 2) + "\n");
+
+// Drop files left by works that are no longer in the manifest.
+const kept = new Set(
+  Object.values(generated).flatMap((g) => [...Object.values(g.avif), ...Object.values(g.webp)].map((src) => path.basename(src))),
+);
+for (const f of await readdir(OUT)) if (!kept.has(f)) await rm(path.join(OUT, f));
+
 await buildCrest();
+await buildRanks();

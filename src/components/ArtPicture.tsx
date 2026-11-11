@@ -7,11 +7,13 @@ type Props = {
   /** The hero: loads eagerly at high priority. Everything else is lazy. */
   priority?: boolean;
   className?: string;
+  /** A repeat of a work already described on the page (looping strips): empty alt. */
+  decorative?: boolean;
   ref?: Ref<HTMLImageElement>;
 };
 
 /** A self-hosted artwork: AVIF, then WebP, with its size reserved and its focal point kept in view. */
-export function ArtPicture({ work, sizes, priority = false, className, ref }: Props) {
+export function ArtPicture({ work, sizes, priority = false, className, decorative = false, ref }: Props) {
   return (
     <picture>
       <source type="image/avif" srcSet={srcSet(work.image.avif)} sizes={sizes} />
@@ -21,7 +23,7 @@ export function ArtPicture({ work, sizes, priority = false, className, ref }: Pr
         src={fallbackSrc(work.image.webp)}
         width={work.image.width}
         height={work.image.height}
-        alt={work.alt}
+        alt={decorative ? "" : work.alt}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         decoding={priority ? "auto" : "async"}
