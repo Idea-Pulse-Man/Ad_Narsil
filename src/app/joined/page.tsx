@@ -12,7 +12,7 @@ export default async function Joined({ searchParams }: { searchParams: Promise<{
   return (
     <PageShell center>
       <div className="grid justify-items-center gap-6">
-        <Crest size={112} className="crest-glow" />
+        <Crest size={112} eager className="crest-glow" />
         <h1 className="display-2">{failed ? t.errorTitle : t.title}</h1>
         <p className="lede">{failed ? t.errorSub : t.sub}</p>
         <a href={failed ? "/#doors" : "/"} className="link-gold">

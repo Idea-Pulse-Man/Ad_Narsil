@@ -2,7 +2,7 @@
 
 import { useRef, useState, type ReactNode } from "react";
 import { ArtPicture } from "@/components/ArtPicture";
-import { shortTitle, type Artwork } from "@/content/art";
+import { shortTitle, type Artwork } from "@/content/art-utils";
 import { COPY, ROMAN } from "@/content/copy";
 import { track } from "@/lib/analytics";
 

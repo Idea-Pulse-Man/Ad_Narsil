@@ -19,7 +19,7 @@ export function Header({ exhibition = true }: { exhibition?: boolean }) {
     <header className="site-header" data-scrolled={exhibition ? scrolled : true}>
       <div className="mx-auto flex h-12 max-w-[1336px] items-center justify-between px-4 min-[390px]:px-5 lg:h-16 lg:px-12">
         <a href={exhibition ? "#entrance" : "/"} className="-m-2 flex min-h-11 items-center gap-2.5 p-2 no-underline">
-          <Crest size={28} className="crest-glow" />
+          <Crest size={28} eager className="crest-glow" />
           <span className="wordmark">Narsil</span>
         </a>
         {exhibition && (

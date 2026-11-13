@@ -1,5 +1,5 @@
 import type { Ref } from "react";
-import { fallbackSrc, srcSet, type Artwork } from "@/content/art";
+import { fallbackSrc, srcSet, type Artwork } from "@/content/art-utils";
 
 type Props = {
   work: Artwork;

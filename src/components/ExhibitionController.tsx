@@ -97,13 +97,16 @@ export function ExhibitionController() {
       frame = 0;
       const y = window.scrollY;
       const vh = window.innerHeight;
-      exhibition.set({ scrolled: y > 80 });
-      segments.forEach((seg, i) => {
+      // Read every slide's geometry before writing any style, so the browser lays out once per frame, not once per slide.
+      const fills = segments.map((_, i) => {
         const s = slides[i];
-        if (!s) return;
-        const p = Math.min(1, Math.max(0, (y + vh - s.offsetTop) / s.offsetHeight));
-        seg.style.setProperty("--p", p.toFixed(3));
+        return s ? Math.min(1, Math.max(0, (y + vh - s.offsetTop) / s.offsetHeight)) : null;
       });
+      segments.forEach((seg, i) => {
+        const p = fills[i];
+        if (p !== null) seg.style.setProperty("--p", p.toFixed(3));
+      });
+      exhibition.set({ scrolled: y > 80 });
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(paint);
