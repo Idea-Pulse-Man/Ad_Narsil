@@ -1,5 +1,25 @@
 [
   {
+    "slug": "van-gogh-self-portrait",
+    "catalogId": "rijks-sk-a-3262",
+    "title": "Self-portrait",
+    "artist": "Vincent van Gogh",
+    "date": "1887",
+    "medium": "Oil on cardboard",
+    "museum": "Rijksmuseum",
+    "accession": "SK-A-3262",
+    "license": "Public domain",
+    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-3262",
+    "imageUrl": "https://iiif.micr.io/bTpft/full/2400,/0/default.jpg",
+    "focal": "50% 40%",
+    "alt": "Self-portrait by Vincent van Gogh, 1887: the red-bearded artist in a grey felt hat, painted in short, rhythmic strokes against a blue-green background.",
+    "roles": [
+      "hero",
+      "gallery"
+    ],
+    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-3262.jpg"
+  },
+  {
     "slug": "milkmaid",
     "catalogId": "rijks-sk-a-2344",
     "title": "The Milkmaid",
@@ -19,26 +39,6 @@
       "print"
     ],
     "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-2344.jpg"
-  },
-  {
-    "slug": "van-gogh-self-portrait",
-    "catalogId": "rijks-sk-a-3262",
-    "title": "Self-portrait",
-    "artist": "Vincent van Gogh",
-    "date": "1887",
-    "medium": "Oil on cardboard",
-    "museum": "Rijksmuseum",
-    "accession": "SK-A-3262",
-    "license": "Public domain",
-    "sourceUrl": "https://www.rijksmuseum.nl/en/collection/SK-A-3262",
-    "imageUrl": "https://iiif.micr.io/bTpft/full/2400,/0/default.jpg",
-    "focal": "50% 40%",
-    "alt": "Self-portrait by Vincent van Gogh, 1887: the red-bearded artist in a grey felt hat, painted in short, rhythmic strokes against a blue-green background.",
-    "roles": [
-      "hero",
-      "gallery"
-    ],
-    "catalogImageUrl": "https://narsil-backend-images.s3.us-east-2.amazonaws.com/artworks/rijks-sk-a-3262.jpg"
   },
   {
     "slug": "merry-drinker",
