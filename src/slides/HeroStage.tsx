@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ArtPicture } from "@/components/ArtPicture";
-import type { Artwork } from "@/content/art";
+import type { Artwork } from "@/content/art-utils";
 import { COPY } from "@/content/copy";
 import { useReducedMotion } from "@/lib/use-media";
 

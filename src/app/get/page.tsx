@@ -48,7 +48,7 @@ export default async function GetPage({ searchParams }: { searchParams: Promise<
         />
       )}
       <div className="is-in grid justify-items-center gap-6">
-        <Crest size={112} className="crest-glow crest-breathe" />
+        <Crest size={112} eager className="crest-glow crest-breathe" />
         <p className="eyebrow eyebrow-center">{COPY.entrance.eyebrow}</p>
         <h1 className="display-2">{COPY.get.title}</h1>
         <p className="lede">{COPY.get.sub}</p>

@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { ArtPicture } from "./ArtPicture";
-import { shortTitle, type Artwork } from "@/content/art";
+import { shortTitle, type Artwork } from "@/content/art-utils";
 
 type Props = {
   work: Artwork;

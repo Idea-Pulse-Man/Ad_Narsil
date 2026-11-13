@@ -1,5 +1,8 @@
-/** The Regia et Ars crest (museum-app/public/branding/regia-et-ars-crest.png), at most 168 px. */
-export function Crest({ size, className = "" }: { size: 28 | 56 | 112 | 168; className?: string }) {
+/**
+ * The Regia et Ars crest (museum-app/public/branding/regia-et-ars-crest.png), at most 168 px.
+ * Lazy unless `eager`: only a crest on screen at load should compete with the hero's painting.
+ */
+export function Crest({ size, eager = false, className = "" }: { size: 28 | 56 | 112 | 168; eager?: boolean; className?: string }) {
   const src = (px: number) => `/branding/crest-${px <= 56 ? 56 : px <= 112 ? 112 : 336}.webp`;
   return (
     <img
@@ -8,6 +11,7 @@ export function Crest({ size, className = "" }: { size: 28 | 56 | 112 | 168; cla
       width={size}
       height={size}
       alt=""
+      loading={eager ? "eager" : "lazy"}
       decoding="async"
       className={className}
     />

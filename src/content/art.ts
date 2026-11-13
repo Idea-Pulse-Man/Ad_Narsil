@@ -1,19 +1,11 @@
 import manifest from "./artworks.json";
 import generated from "./art.generated.json";
+import type { Artwork, BuiltImage } from "./art-utils";
 
-type Manifest = (typeof manifest)[number];
-type Built = {
-  width: number;
-  height: number;
-  palette: string[];
-  placeholder: string;
-  avif: Record<string, string>;
-  webp: Record<string, string>;
-};
+/* Server-only in practice: this module carries the whole catalog. Browser components import from ./art-utils. */
+export { fallbackSrc, shortTitle, srcSet, type Artwork } from "./art-utils";
 
-export type Artwork = Manifest & { image: Built };
-
-const built = generated as Record<string, Built>;
+const built = generated as Record<string, BuiltImage>;
 
 export const ARTWORKS: Artwork[] = manifest.map((work) => {
   const image = built[work.slug];
@@ -28,24 +20,3 @@ export function artwork(slug: string): Artwork {
 }
 
 export const artworksWithRole = (role: string) => ARTWORKS.filter((w) => w.roles.includes(role));
-
-/**
- * The title as a caption can carry it: the museum's subtitles and series
- * names dropped ("Red-Figure Lekythos (Oil Vessel): Athena…" → "Red-Figure Lekythos").
- * Placards and /credits keep the full title.
- */
-export const shortTitle = (work: Artwork) => work.title.split(/ \(|: |, from /)[0];
-
-export const srcSet = (set: Record<string, string>) =>
-  Object.entries(set)
-    .map(([w, src]) => `${src} ${w}w`)
-    .join(", ");
-
-/** The largest variant at or under `width`, for the plain <img src>. */
-export function fallbackSrc(set: Record<string, string>, width = 960): string {
-  const widths = Object.keys(set)
-    .map(Number)
-    .sort((a, b) => a - b);
-  const pick = widths.filter((w) => w <= width).pop() ?? widths[0];
-  return set[pick];
-}
