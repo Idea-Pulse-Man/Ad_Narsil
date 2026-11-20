@@ -4,8 +4,8 @@
  * app's Capacitor-aware client.
  *
  * Its own storage key keeps the admin session apart from anything else on the
- * domain. detectSessionInUrl exchanges the `?code=` that Google sign-in
- * returns with, then strips it from the URL.
+ * domain. Email + password only: no OAuth redirect, so nothing to read from
+ * the URL.
  *
  * Only the publishable ("anon") key: every admin power is enforced by RLS,
  * security-definer RPCs and the backend's requireAdmin.
@@ -26,7 +26,7 @@ export const supabase: SupabaseClient | null =
           autoRefreshToken: true,
           flowType: "pkce",
           storageKey: "narsil-admin-auth",
-          detectSessionInUrl: true,
+          detectSessionInUrl: false,
         },
         realtime: { params: { eventsPerSecond: 20 } },
       })
