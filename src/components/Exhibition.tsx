@@ -1,5 +1,5 @@
-import type { ComponentType } from "react";
 import { ROOM_NAMES, type RoomId } from "@/content/copy";
+import { COPY } from "@/content/copy";
 import { Acquisitions } from "@/slides/Acquisitions";
 import { Ages } from "@/slides/Ages";
 import { Assessment } from "@/slides/Assessment";
@@ -14,29 +14,55 @@ import { Faq } from "./Faq";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { RoomRail, StoryBar } from "./RoomNav";
-import type { SlideProps } from "./Slide";
 import { SkipLinks } from "./SkipLinks";
 import { StickyCta } from "./StickyCta";
 
-const SLIDES: Record<RoomId, ComponentType<SlideProps>> = {
-  entrance: Entrance,
-  gallery: Gallery,
-  placard: Placard,
-  ages: Ages,
-  assessment: Assessment,
-  ladder: Ladder,
-  acquisitions: Acquisitions,
-  guild: Guild,
-  doors: Doors,
-};
-
-export const HOME_ORDER: RoomId[] = ["entrance", "gallery", "placard", "ages", "assessment", "ladder", "acquisitions", "guild", "doors"];
+export type Variant = "home" | "quiz" | "prints" | "learn";
 
 /**
- * The page: nine full-screen rooms, then the FAQ and footer (brief §5.1).
- * Campaign variants (step 3) reuse it with their own hero and order.
+ * Room order per page (brief §8). On /quiz the Royal Assessment is the hero
+ * itself, so it has no separate Room V.
  */
-export function Exhibition({ order = HOME_ORDER, variant = "home" }: { order?: RoomId[]; variant?: string }) {
+export const ORDERS: Record<Variant, RoomId[]> = {
+  home: ["entrance", "gallery", "placard", "ages", "assessment", "ladder", "acquisitions", "guild", "doors"],
+  quiz: ["assessment", "ladder", "gallery", "placard", "ages", "acquisitions", "guild", "doors"],
+  prints: ["entrance", "acquisitions", "gallery", "placard", "assessment", "ladder", "guild", "doors"],
+  learn: ["entrance", "ages", "placard", "gallery", "assessment", "ladder", "guild", "acquisitions", "doors"],
+};
+
+function Room({ id, index, variant }: { id: RoomId; index: number; variant: Variant }) {
+  switch (id) {
+    case "entrance": {
+      const v = variant === "prints" || variant === "learn" ? COPY.variants[variant] : null;
+      return <Entrance index={index} title={v?.title} sub={v?.sub} />;
+    }
+    case "assessment":
+      return (
+        <Assessment
+          index={index}
+          hero={variant === "quiz" && index === 0 ? { eyebrow: COPY.variants.quiz.eyebrow, title: COPY.variants.quiz.title, sub: COPY.variants.quiz.sub } : undefined}
+        />
+      );
+    case "gallery":
+      return <Gallery index={index} />;
+    case "placard":
+      return <Placard index={index} />;
+    case "ages":
+      return <Ages index={index} />;
+    case "ladder":
+      return <Ladder index={index} />;
+    case "acquisitions":
+      return <Acquisitions index={index} />;
+    case "guild":
+      return <Guild index={index} />;
+    case "doors":
+      return <Doors index={index} />;
+  }
+}
+
+/** The page: full-screen rooms, then the FAQ and footer (brief §5.1). Campaign variants reuse it with their own hero and order. */
+export function Exhibition({ variant = "home" }: { variant?: Variant }) {
+  const order = ORDERS[variant];
   const rooms = order.map((id) => ({ id, name: ROOM_NAMES[id] }));
   return (
     <>
@@ -45,10 +71,9 @@ export function Exhibition({ order = HOME_ORDER, variant = "home" }: { order?: R
       <Header />
       <RoomRail rooms={rooms} />
       <main id="exhibition" data-variant={variant}>
-        {order.map((id, i) => {
-          const Room = SLIDES[id];
-          return <Room key={id} index={i} />;
-        })}
+        {order.map((id, i) => (
+          <Room key={id} id={id} index={i} variant={variant} />
+        ))}
       </main>
       <Faq />
       <Footer />

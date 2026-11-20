@@ -8,11 +8,11 @@ import { EraTrack } from "./EraTrack";
 export function Ages({ index }: SlideProps) {
   const t = COPY.ages;
   return (
-    <Slide id="ages" index={index}>
-      <div className="slide-inner grid gap-10">
+    <Slide id="ages" index={index} className="ages">
+      <div className="slide-inner ages-stage grid gap-10">
         <SlideHeading id="ages" index={index} title={t.title} sub={t.sub} />
         <div className="reveal" style={stagger(3)}>
-          <EraTrack count={t.eras.length}>
+          <EraTrack ids={t.eras.map((e) => e.id)} note={<p className="fine m-0 max-w-xl">{t.small}</p>}>
             {t.eras.map((era, i) => {
               const [main, ...rest] = artworksWithRole(`age:${era.id}`);
               return (
@@ -43,9 +43,6 @@ export function Ages({ index }: SlideProps) {
             })}
           </EraTrack>
         </div>
-        <p className="fine reveal max-w-xl" style={stagger(4)}>
-          {t.small}
-        </p>
       </div>
     </Slide>
   );

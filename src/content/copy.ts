@@ -4,6 +4,7 @@
  * Eyebrows are sentence case; CSS uppercases them.
  */
 import { SITE } from "@/config/site";
+import { PRICES } from "./prices";
 
 const prelaunch = SITE.launchState === "prelaunch";
 
@@ -108,6 +109,9 @@ export const COPY = {
     small: "Like, save to your Vault, comment or download from the side rail.",
     wallLabel: `A few of the ${SITE.catalogLabel} works in the feed`,
     pause: "Hover or focus the wall to pause it.",
+    hold: "Press and hold the paintings",
+    holdHelp: "Press and hold the wall, or hold the space bar while it has focus, to hide everything but the art.",
+    gesturesLabel: "Gestures in the feed",
   },
 
   placard: {
@@ -152,35 +156,40 @@ export const COPY = {
 
   assessment: {
     title: "The court will now judge your *taste*.",
-    sub: `Every day the app serves ${numberWord(SITE.dailyQuestions)} new questions. Score well and you're knighted. Score badly and… well.`,
-    /** Appended to sub once the on-page quiz ships (step 2). */
-    tryNow: "Try five now.",
+    sub: `Every day the app serves ${numberWord(SITE.dailyQuestions)} new questions. Score well and you're knighted. Score badly and… well. Try five now.`,
     small: "Sample questions. The app's Assessment is new every day.",
-    sample: {
-      label: "Sample question",
-      who: {
-        prompt: "Who painted this?",
-        slug: "cezanne-sainte-victoire",
-        options: ["Vincent van Gogh", "Claude Monet", "Paul Cézanne", "Paul Gauguin"],
-        answer: 2,
-        fact: "Cézanne painted this mountain near his home in Aix-en-Provence again and again, in oil and watercolour, for more than twenty years.",
-      },
-      older: {
-        prompt: "Which is older?",
-        slugs: ["hokusai-south-wind", "lippi-holy-family"],
-        answer: 1,
-        fact: "Filippino Lippi's Holy Family is about 340 years older than Hokusai's Red Fuji.",
-      },
+    quiz: {
+      label: "The Royal Assessment",
+      startTitle: "The court is in session.",
+      startNote: "5 questions · about a minute · no sign-up",
+      begin: "Begin the Assessment",
+      progress: (n: number, total: number) => `Question ${n} of ${total}`,
+      true: "True",
+      false: "False",
+      left: "Left work.",
+      right_: "Right work.",
       right: "Correct.",
       wrong: "Not quite.",
+      rightAnswer: "the right answer",
+      yourPick: "your answer",
       next: "Next question",
       finish: "Hear the verdict",
-      doneTitle: "The court has seen enough… for now.",
-      doneSub: `In the app the court asks ${numberWord(SITE.dailyQuestions)} new questions every day, and keeps your score.`,
+      spoken: "The court has spoken",
+      score: (n: number, total: number) => `${n} / ${total}`,
+      share: "Share my verdict",
+      copied: "Link copied. Paste it anywhere.",
+      copyFailed: "Couldn't copy the link. Try again.",
       cta: "Play today's Assessment in the app",
       again: "Try again",
-      score: (n: number, total: number) => `${n} / ${total}`,
     },
+  },
+
+  /** /verdict/<slug> pages (brief §9). */
+  verdict: {
+    eyebrow: "The court has spoken",
+    take: "Take the Assessment",
+    sub: "Five questions, no sign-up. Then face a new Assessment every day in the app.",
+    ogLine: "Take the Royal Assessment · Narsil",
   },
 
   ladder: {
@@ -189,16 +198,34 @@ export const COPY = {
     small: "Want a nudge? Turn on the daily reminder and keep your streak alive.",
     ranks: ["Peasant", "Scholar", "Archivist", "Master Archivist", "Grand Archivist", "High Archivist", "Royal Archivist"],
     ladderLabel: "The seven ranks, each in its heraldic frame",
+    seals: {
+      title: "Seals",
+      names: "Apprentice · Scholar · Master",
+      line: "Only a flawless appraisal claims this seal.",
+    },
+    halls: {
+      title: "Halls",
+      items: ["The Hall of your rank, today", "The Monthly Hall, all levels", "The Discover Hall, best trials"],
+    },
   },
 
   acquisitions: {
     title: "Take a masterpiece *home*.",
-    sub: `Canvas from $${SITE.prices.canvasFrom}. Posters from $${SITE.prices.posterFrom}. The price you see includes shipping and tax, to any US address.`,
+    sub: `Canvas from $${PRICES.canvasFrom}. Posters from $${PRICES.posterFrom}. The price you see includes shipping and tax, to any US address.`,
     cta: "Choose yours in the app",
     small:
       "Ordered in the app with Apple Pay or card. Some works cost a few dollars more; the app shows the exact price before you pay.",
-    wallLabel: "A few of the works you can order as canvas or poster",
-    formats: "Canvas · Poster",
+    /** Six works for the true-scale preview: Met, Cleveland or Rijksmuseum, never Wellcome (not sold as prints). */
+    preview: ["milkmaid", "red-kerchief", "little-street", "van-gogh-plane-trees", "turner-burning-parliament", "hokusai-south-wind"],
+    label: "True-scale preview",
+    artwork: "Artwork",
+    product: "Print",
+    size: "Size",
+    products: { canvas: "Canvas", poster: "Poster" } as Record<"canvas" | "poster", string>,
+    from: (price: number) => `from $${price}`,
+    scale: "True scale, beside an 84-inch sofa.",
+    wallLabel: (title: string, product: string, size: string) =>
+      `${title} as a ${size} ${product.toLowerCase()} on a living-room wall, above an 84-inch sofa`,
   },
 
   guild: {
@@ -222,6 +249,24 @@ export const COPY = {
       },
     ],
     loupe: "Detail",
+    table: {
+      caption: "What's free and what the Guild adds",
+      feature: "Feature",
+      free: "Free",
+      guild: "Explorer's Guild",
+      rows: [
+        ["The feed, placards and artist profiles", true, true],
+        ["Discover ages and empires (with a free account)", true, true],
+        ["Daily Royal Assessment, levels and Halls", true, true],
+        ["Ancient Egypt trials", true, true],
+        ["Every other age and empire trial", false, true],
+        ["Practice (Uncharted Archives)", "5 questions a round", "Endless"],
+        ["Downloads", "Up to 2,000 px", "Master File"],
+        ["Canvas and poster prints", true, "Same prices"],
+      ] as [string, boolean | string, boolean | string][],
+      yes: "Included",
+      no: "Not included",
+    },
   },
 
   doors: {
@@ -231,6 +276,26 @@ export const COPY = {
       : "Narsil is free on iPhone. Your first masterpiece is one swipe away.",
     note: prelaunch ? "Coming soon to the App Store · Free to download" : "No account needed to start.",
     ribbonLabel: "Works waiting inside",
+  },
+
+  /** Campaign landing pages (brief §8): the hero repeats the ad's promise. */
+  variants: {
+    quiz: {
+      eyebrow: "The daily art quiz in Narsil",
+      title: "Can you tell a Vermeer from a *Rembrandt*?",
+      sub: "Take the five-question test right here. The royal court's verdict is… theatrical.",
+      metaTitle: "The Royal Assessment · Narsil, the art quiz for iPhone",
+    },
+    prints: {
+      title: "Hang a masterpiece in your living *room*.",
+      sub: `Canvas from $${PRICES.canvasFrom}, posters from $${PRICES.posterFrom}, shipping and tax included in the US. Choose from thousands of public-domain masterpieces in the Narsil app.`,
+      metaTitle: "Canvas and poster prints of masterpieces · Narsil",
+    },
+    learn: {
+      title: "Learn art history in five minutes a *day*.",
+      sub: "Swipe through real masterpieces, read the story behind each one, and test yourself in a daily quiz. Free on iPhone.",
+      metaTitle: "Learn art history in five minutes a day · Narsil",
+    },
   },
 
   faq: {

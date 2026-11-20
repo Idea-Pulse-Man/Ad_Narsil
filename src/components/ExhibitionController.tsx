@@ -90,6 +90,24 @@ export function ExhibitionController() {
       }
     });
     for (const el of document.querySelectorAll("[data-cta-anchor]")) ctaObserver.observe(el);
+    // A hero without its own CTA (the /quiz variant): the sticky bar and header button show from the start.
+    if (!document.querySelector("[data-cta-anchor=hero]")) exhibition.set({ heroCtaVisible: false });
+
+    // Long rooms (the ladder) reveal piece by piece as each part scrolls in, not all at once.
+    const selfObserver = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries)
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            selfObserver.unobserve(e.target);
+          }
+      },
+      { threshold: 0.25 },
+    );
+    for (const el of document.querySelectorAll<HTMLElement>("[data-reveal-self]")) {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-in");
+      else selfObserver.observe(el);
+    }
 
     // Header background and story bar fill, once per frame while scrolling.
     let frame = 0;
@@ -151,6 +169,7 @@ export function ExhibitionController() {
     return () => {
       slideObserver.disconnect();
       ctaObserver.disconnect();
+      selfObserver.disconnect();
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
