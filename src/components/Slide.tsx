@@ -5,9 +5,21 @@ import { Rich } from "./Rich";
 export type SlideProps = { index: number };
 
 /** One room: a full-screen section that snaps (brief §5.1–5.2). */
-export function Slide({ id, index, className = "", children }: { id: RoomId; index: number; className?: string; children: ReactNode }) {
+export function Slide({
+  id,
+  index,
+  className = "",
+  labelledBy = `${id}-title`,
+  children,
+}: {
+  id: RoomId;
+  index: number;
+  className?: string;
+  labelledBy?: string;
+  children: ReactNode;
+}) {
   return (
-    <section className={`slide ${className}`} id={id} data-room={ROMAN[index]} aria-labelledby={`${id}-title`} tabIndex={-1}>
+    <section className={`slide ${className}`} id={id} data-room={ROMAN[index]} aria-labelledby={labelledBy} tabIndex={-1}>
       {children}
     </section>
   );

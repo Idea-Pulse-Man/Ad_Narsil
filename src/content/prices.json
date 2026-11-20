@@ -1,0 +1,38 @@
+{
+  "fetchedAt": "2026-11-20T19:56:17.343Z",
+  "source": "https://d2lvgalchu2nps.cloudfront.net/api/prices",
+  "canvas": [
+    {
+      "size": "Small",
+      "dimensions": "12 × 16\"",
+      "price": 59
+    },
+    {
+      "size": "Medium",
+      "dimensions": "18 × 24\"",
+      "price": 89
+    },
+    {
+      "size": "Large",
+      "dimensions": "24 × 36\"",
+      "price": 129
+    }
+  ],
+  "poster": [
+    {
+      "size": "Small",
+      "dimensions": "12 × 16\"",
+      "price": 29
+    },
+    {
+      "size": "Medium",
+      "dimensions": "18 × 24\"",
+      "price": 35
+    },
+    {
+      "size": "Large",
+      "dimensions": "24 × 36\"",
+      "price": 45
+    }
+  ]
+}

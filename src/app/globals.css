@@ -493,6 +493,29 @@
     opacity: 0.6;
   }
 
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 22px;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    color: var(--color-gilt-light);
+    font-weight: 600;
+    font-size: 15px;
+    white-space: nowrap;
+    text-decoration: none;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-gilt-light);
+    background: #c4a5741a;
+  }
+
   .link-gold {
     color: var(--color-accent);
     text-decoration: underline;
@@ -1444,5 +1467,483 @@
     max-width: 200px;
     font-size: 11px;
     text-align: left;
+  }
+
+  /* ── Room II: gestures, press and hold, the phone ─────────────────────── */
+
+  .gesture {
+    padding: 0;
+    transition:
+      border-color 0.3s,
+      background-color 0.3s;
+  }
+
+  .gesture-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--color-canvas-muted);
+    text-align: left;
+  }
+
+  @media (min-width: 1024px) {
+    .gesture-btn {
+      padding: 12px 16px;
+      font-size: 15px;
+    }
+  }
+
+  .gesture[data-active="true"] {
+    border-color: var(--color-accent);
+    background: #c4a57414;
+  }
+
+  .hold-stage {
+    position: relative;
+    border-radius: 16px;
+    touch-action: pan-y;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  .hold-stage:focus-visible {
+    outline-offset: 6px;
+  }
+
+  .hold-stage:focus-visible .wall-col {
+    animation-play-state: paused;
+  }
+
+  /* Clean view: only the art. Frames, captions and the fade at the edges go; the drift stops. */
+  .hold-stage .gilt-frame,
+  .hold-stage .art-caption,
+  .hold-stage .wall {
+    transition:
+      opacity 0.4s var(--ease-gallery),
+      box-shadow 0.4s var(--ease-gallery),
+      border-color 0.4s var(--ease-gallery);
+  }
+
+  .hold-stage[data-clean="true"] .wall-col {
+    animation-play-state: paused;
+  }
+
+  .hold-stage[data-clean="true"] .art-caption {
+    opacity: 0;
+  }
+
+  .hold-stage[data-clean="true"] .gilt-frame {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .hold-stage[data-clean="true"] .gilt-frame::after {
+    opacity: 0;
+  }
+
+  .hold-stage[data-clean="true"] .wall {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hold-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px 0 0;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-stone);
+    transition: opacity 0.3s;
+  }
+
+  .hold-stage[data-clean="true"] .hold-hint {
+    opacity: 0;
+  }
+
+  .hold-dot {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #c4a5741f;
+  }
+
+  .phone {
+    position: relative;
+    width: min(100%, 300px, 36svh);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .phone {
+      width: min(320px, 62svh / 2.04);
+    }
+  }
+
+  .phone-screen {
+    position: absolute;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .phone-screen video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .phone-bezel {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .phone-play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #14100ecc;
+    color: var(--color-gilt-light);
+  }
+
+  /* ── Room IV: the pinned track (desktop) ──────────────────────────────── */
+
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .slide.is-pinned {
+      min-height: calc(100svh + var(--pin-extra, 0px));
+      align-content: start;
+      padding-block: 0;
+    }
+    .slide.is-pinned > .ages-stage {
+      position: sticky;
+      top: 0;
+      min-height: 100svh;
+      align-content: center;
+      gap: 28px;
+      padding-block: 72px 24px;
+    }
+    /* The whole stage fits one desktop screen: a smaller headline and wider, shorter art. */
+    .is-pinned .display-2 {
+      font-size: clamp(2.25rem, 0.9rem + 3.2vw, 3.75rem);
+    }
+    .is-pinned .era-art {
+      aspect-ratio: 2 / 1;
+    }
+    .is-pinned .era-track {
+      overflow-x: hidden;
+      scroll-snap-type: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);
+    }
+  }
+
+  /* ── Room V: the Assessment ───────────────────────────────────────────── */
+
+  .seal-stamp {
+    animation: seal-stamp 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+    filter: drop-shadow(0 10px 18px #000000a6);
+  }
+
+  @keyframes seal-stamp {
+    0% {
+      opacity: 0;
+      transform: scale(1.7) rotate(-14deg);
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(-4deg);
+    }
+  }
+
+  .quiz-start {
+    min-height: 220px;
+    align-content: center;
+  }
+
+  /* ── Room VI: seals and halls ─────────────────────────────────────────── */
+
+  .ladder-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  /* Revealed one by one as each scrolls in (ExhibitionController), not with the room. */
+  .reveal-ready [data-reveal-self]:not(.is-in) .reveal,
+  .reveal-ready [data-reveal-self].reveal:not(.is-in) {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+  }
+
+  .reveal-ready .rank[data-reveal-self]:not(.is-in) {
+    transform: perspective(900px) rotateX(-60deg) translateY(32px);
+    filter: none;
+  }
+
+  /* ── Room VII: the true-scale print preview ───────────────────────────── */
+
+  .print-preview {
+    display: grid;
+    gap: 20px;
+  }
+
+  .print-room {
+    display: block;
+    width: 100%;
+    max-height: min(400px, 42svh);
+    height: auto;
+    border: 1px solid var(--color-umber);
+    border-radius: 16px;
+    background: #1c1510;
+  }
+
+  .print-hang {
+    animation: print-hang 0.6s var(--ease-gallery) both;
+  }
+
+  @keyframes print-hang {
+    from {
+      opacity: 0;
+    }
+  }
+
+  .print-controls {
+    display: grid;
+    gap: 14px;
+  }
+
+  .print-field {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .print-field > legend {
+    margin-bottom: 18px;
+    padding: 0;
+  }
+
+  .print-thumbs {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .print-thumb {
+    display: block;
+    cursor: pointer;
+  }
+
+  .print-thumb-img {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid var(--color-umber);
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .print-thumb-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .print-thumb:hover .print-thumb-img {
+    border-color: var(--color-accent-deep);
+  }
+
+  .print-thumb input:checked + .print-thumb-img {
+    border-color: var(--color-gilt-light);
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+
+  .print-thumb input:focus-visible + .print-thumb-img,
+  .seg-opt input:focus-visible + span {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .seg {
+    display: flex;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--color-umber);
+    border-radius: 999px;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .seg-opt {
+    flex: 1 1 0;
+    cursor: pointer;
+  }
+
+  .seg-opt > span {
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+    min-width: 76px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    color: var(--color-canvas-muted);
+    font-size: 14px;
+    line-height: 1.15;
+    text-align: center;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .seg-opt:hover > span {
+    color: var(--color-canvas);
+  }
+
+  .seg-opt input:checked + span {
+    background: var(--color-accent);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  @media (min-width: 1024px) {
+    .print-controls {
+      grid-template-columns: auto auto;
+      align-items: end;
+      justify-content: start;
+      column-gap: 28px;
+    }
+    .print-controls > :first-child,
+    .print-controls > :last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ── Room VIII: compact perks beside the comparison table ─────────────── */
+
+  .guild-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .guild-grid {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+      gap: 32px;
+      align-items: start;
+    }
+  }
+
+  .guild-grid .perk {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .guild-grid .perk {
+      grid-template-columns: 150px minmax(0, 1fr);
+    }
+  }
+
+  .guild-grid .perk-art {
+    height: auto;
+    min-height: 120px;
+    border-bottom: 0;
+    border-right: 1px solid var(--color-umber);
+  }
+
+  .guild-grid .loupe {
+    right: 8px;
+    bottom: 12px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .guild-grid .loupe-label {
+    bottom: -9px;
+    font-size: 8.5px;
+  }
+
+  .guild-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    line-height: 1.35;
+  }
+
+  @media (min-width: 1024px) {
+    .guild-table {
+      font-size: 14.5px;
+    }
+  }
+
+  .guild-table th,
+  .guild-table td {
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--color-umber);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .guild-table thead th {
+    padding-top: 0;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-canvas);
+    border-bottom-color: var(--color-accent-deep);
+  }
+
+  .guild-table tbody th {
+    padding-left: 0;
+    font-weight: 400;
+    text-align: left;
+    color: var(--color-canvas-muted);
+  }
+
+  .guild-table td {
+    width: 26%;
+    color: var(--color-stone);
+  }
+
+  .guild-table td:last-child {
+    color: var(--color-gilt-light);
+  }
+
+  /* ── /verdict pages ───────────────────────────────────────────────────── */
+
+  .verdict-card {
+    padding: 36px 24px 32px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #3a2a1c 0%, transparent 70%),
+      var(--color-ink-soft);
+  }
+
+  @media (min-width: 640px) {
+    .verdict-card {
+      padding: 48px 48px 40px;
+    }
   }
 }

@@ -1,5 +1,11 @@
 import { Exhibition } from "@/components/Exhibition";
+import { JsonLd } from "@/components/JsonLd";
 
 export default function Home() {
-  return <Exhibition />;
+  return (
+    <>
+      <JsonLd />
+      <Exhibition />
+    </>
+  );
 }
