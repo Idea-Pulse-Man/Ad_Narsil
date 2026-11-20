@@ -7,7 +7,7 @@
  */
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { AdminSessionProvider, rememberReturnHash, useAdminAuthState } from "./auth";
+import { AdminSessionProvider, useAdminAuthState } from "./auth";
 import { Dashboard } from "./Dashboard";
 import { supabase, SUPABASE_ENABLED } from "./lib/supabase";
 
@@ -110,34 +110,19 @@ function SignOutButton({ onSignOut }: { onSignOut: () => Promise<void> }) {
 function SignIn({ notice }: { notice: string | null }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState<"password" | "google" | null>(null);
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (busy || !supabase) return;
-    setBusy("password");
+    setBusy(true);
     setError(null);
     const { error: err } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     // On success the auth listener takes over and this screen unmounts.
     if (err) {
       setError(err.message);
-      setBusy(null);
-    }
-  };
-
-  const google = async () => {
-    if (busy || !supabase) return;
-    setBusy("google");
-    setError(null);
-    rememberReturnHash();
-    const { error: err } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/admin` },
-    });
-    if (err) {
-      setError(err.message);
-      setBusy(null);
+      setBusy(false);
     }
   };
 
@@ -178,27 +163,12 @@ function SignIn({ notice }: { notice: string | null }) {
         )}
         <button
           type="submit"
-          disabled={busy !== null}
+          disabled={busy}
           className="w-full rounded-full bg-canvas px-4 py-2 text-sm font-medium text-ink disabled:opacity-50"
         >
-          {busy === "password" ? "Signing in…" : "Sign in"}
+          {busy ? "Signing in…" : "Sign in"}
         </button>
       </form>
-
-      <div className="my-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-white/30">
-        <span className="h-px flex-1 bg-white/10" />
-        or
-        <span className="h-px flex-1 bg-white/10" />
-      </div>
-
-      <button
-        type="button"
-        onClick={() => void google()}
-        disabled={busy !== null}
-        className="w-full rounded-full border border-white/15 px-4 py-2 text-sm text-canvas hover:bg-white/[0.04] disabled:opacity-50"
-      >
-        {busy === "google" ? "Opening Google…" : "Continue with Google"}
-      </button>
     </Centered>
   );
 }

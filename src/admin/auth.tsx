@@ -21,32 +21,12 @@ export type AuthState =
   | { kind: "not-admin"; session: Session }
   | { kind: "admin"; session: Session };
 
-/** Where to land after Google sign-in, which returns to plain /admin. */
-const RETURN_KEY = "narsil-admin-return";
 const EXPIRED = "Your session expired — sign in again.";
 
 /** Messages that mean the session is no longer valid (lib, backend, PostgREST). */
 export function isSessionError(err: unknown): boolean {
   const msg = err instanceof Error ? err.message : String(err ?? "");
   return /session (has )?expired|JWT expired|invalid JWT|Unauthorized/i.test(msg);
-}
-
-export function rememberReturnHash(): void {
-  try {
-    if (window.location.hash) sessionStorage.setItem(RETURN_KEY, window.location.hash);
-  } catch {
-    // Storage blocked — they land on Overview instead.
-  }
-}
-
-function restoreReturnHash(): void {
-  try {
-    const hash = sessionStorage.getItem(RETURN_KEY);
-    sessionStorage.removeItem(RETURN_KEY);
-    if (hash && !window.location.hash) history.replaceState(history.state, "", `${window.location.pathname}${hash}`);
-  } catch {
-    // Nothing stored.
-  }
 }
 
 export function useAdminAuthState(): {
@@ -89,7 +69,6 @@ export function useAdminAuthState(): {
       if (error) {
         setState({ kind: "profile-error", session, message: error.message });
       } else if ((data as { role?: string } | null)?.role === "admin") {
-        restoreReturnHash();
         setState({ kind: "admin", session });
       } else {
         setState({ kind: "not-admin", session });
@@ -105,11 +84,6 @@ export function useAdminAuthState(): {
   const signOut = useCallback(async () => {
     if (!supabase) return;
     manualSignOut.current = true;
-    try {
-      sessionStorage.removeItem(RETURN_KEY);
-    } catch {
-      // ignore
-    }
     const { error } = await supabase.auth.signOut();
     // A dead refresh token makes the server call fail; the local session is gone either way.
     if (error) await supabase.auth.signOut({ scope: "local" });
