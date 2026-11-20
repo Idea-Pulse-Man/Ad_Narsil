@@ -1,33 +1,9 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-/* Tokens from museum-app/src/index.css and the "Royal Gold" splash in
-   museum-app/index.html (brief §4). Names match the app's so classes do too. */
-@theme {
-  --color-ink: #14100e;
-  --color-ink-soft: #1f1915;
-  --color-umber: #3a2e24;
-  --color-canvas: #f4efe6;
-  --color-canvas-muted: #e4d9c8;
-  --color-stone: #a89880;
-  --color-stone-450: #a89880;
-  --color-accent: #c4a574;
-  --color-accent-deep: #9a7b4a;
-  --color-gilt-light: #f7dfa0;
-  --color-gilt-glow: #d9a441;
-  --color-gilt-bright: #f4d78a;
-  /* Sampled from museum-app/public/person-levels/level-7.png */
-  --color-oxblood: #74242c;
-
-  --shadow-placard: 0 -20px 60px -15px rgba(20, 12, 8, 0.55);
-  --shadow-rail: 0 8px 30px rgba(20, 12, 8, 0.3);
-
-  --ease-gallery: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@theme inline {
-  --font-sans: var(--font-inter), system-ui, "Segoe UI", sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
-}
+/* /admin builds its own stylesheet (src/admin/admin.css), so its classes stay
+   out of the public pages' CSS. */
+@source not "../admin";
 
 :root {
   color-scheme: dark;
