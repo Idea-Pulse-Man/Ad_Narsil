@@ -56,13 +56,30 @@ export const MIRRORS: MirrorSpec[] = [
   },
   { from: "lib/support.ts", to: "support.ts" },
   { from: "lib/orders.ts", to: "orders.ts" },
-  { from: "data/types.ts", to: "types.ts", extract: ["UserRole"] },
+  { from: "lib/news.ts", to: "news.ts" },
+  { from: "lib/quizBank.ts", to: "quizBank.ts" },
+  { from: "lib/dailyQuiz.ts", to: "dailyQuiz.ts" },
+  { from: "lib/quizEngineAdmin.ts", to: "quizEngineAdmin.ts" },
+  { from: "lib/imageUrl.ts", to: "imageUrl.ts" },
+  { from: "lib/quiz/types.ts", to: "quiz/types.ts" },
+  { from: "lib/quiz/random.ts", to: "quiz/random.ts" },
+  { from: "lib/quiz/engine/types.ts", to: "quiz/engine/types.ts" },
+  { from: "data/types.ts", to: "types.ts" },
+  { from: "data/history.ts", to: "history.ts" },
 ];
 
-/** Hand-written for the web; mirrored files import these in place of the app's. */
+/**
+ * Hand-written for the web; mirrored files import these in place of the app's.
+ * The last four are extracts: the app's modules pull in the member app
+ * (catalog, storage, StoreKit), so only what the admin uses is kept, by hand.
+ */
 export const WEB_OWNED: Record<string, string> = {
   "lib/supabase.ts": "supabase.ts",
   "lib/api.ts": "api.ts",
+  "data/index.ts": "data.ts",
+  "lib/quiz/topic.ts": "quiz/topic.ts",
+  "lib/quiz/engine/fetch.ts": "quiz/engine/fetch.ts",
+  "lib/subscription.ts": "subscription.ts",
 };
 
 /** npm packages a mirrored file may import. Anything else (Capacitor…) fails the sync. */
