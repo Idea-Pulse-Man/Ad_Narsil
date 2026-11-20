@@ -1,0 +1,12 @@
+/* /admin's own stylesheet: Tailwind scans only src/admin here, and the public
+   site's globals.css skips it, so neither page ships the other's classes. */
+@import "tailwindcss" source(none);
+@import "../app/tokens.css";
+@source "./";
+
+@layer base {
+  /* The exhibition snaps between rooms; a work screen shouldn't. */
+  html:has(.admin-root) {
+    scroll-snap-type: none;
+  }
+}
