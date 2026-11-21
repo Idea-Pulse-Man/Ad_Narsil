@@ -1,7 +1,18 @@
 "use client";
 
+import type { ArtworkFilter } from "../lib/admin";
+import { ARTWORK_FILTERS } from "../lib/admin";
+import type { CanvasOrderStatus } from "../lib/orders";
 import type { Route } from "../route";
 import type { ShowToast } from "../ui/Toasts";
+import AdminArtworks from "./app/AdminArtworks";
+import AdminInbox from "./app/AdminInbox";
+import AdminInsights from "./app/AdminInsights";
+import AdminNews from "./app/AdminNews";
+import AdminOrders from "./app/AdminOrders";
+import AdminOverview from "./app/AdminOverview";
+import AdminQuiz from "./app/AdminQuiz";
+import AdminUsers from "./app/AdminUsers";
 
 export interface SectionProps {
   route: Route;
@@ -13,33 +24,54 @@ export interface SectionProps {
   onUnreadCleared: () => void;
 }
 
-/** Which milestone (admin brief §10) builds each section. */
-const MILESTONE: Record<Route["section"], number> = {
-  overview: 3,
-  insights: 3,
-  users: 4,
-  artworks: 4,
-  orders: 5,
-  news: 6,
-  inbox: 6,
-  quiz: 7,
-};
+const ORDER_STATUSES: readonly string[] = [
+  "registered",
+  "pending_payment",
+  "paid",
+  "submitted",
+  "fulfillment_failed",
+  "shipped",
+  "completed",
+  "cancelled",
+];
 
-/** Routes each section to its panel. Panels land milestone by milestone. */
-export function SectionView({ route }: SectionProps) {
-  const detail =
-    route.section === "orders" && route.status
-      ? `Filter from the link: ${route.status.replace(/_/g, " ")}.`
-      : route.section === "artworks" && route.filter
-        ? `Filter from the link: ${route.filter.replace(/_/g, " ")}.`
-        : route.section === "inbox" && route.userId
-          ? "A thread is selected in the link."
-          : null;
-
-  return (
-    <div className="rounded-2xl border border-dashed border-white/12 p-6 text-sm text-white/55">
-      <p>This panel is built in milestone {MILESTONE[route.section]}.</p>
-      {detail && <p className="mt-1 text-white/40">{detail}</p>}
-    </div>
-  );
+/**
+ * Routes each section to its panel: the app's admin screens, ported
+ * (src/admin/sections/app), wired to the hash links (admin brief §2).
+ */
+export function SectionView({ route, navigate, showToast, refreshUnread, onUnreadCleared }: SectionProps) {
+  switch (route.section) {
+    case "overview":
+      return <AdminOverview onJumpToOrders={(status) => navigate({ section: "orders", status: status === "all" ? null : status })} />;
+    case "users":
+      return <AdminUsers showToast={showToast} />;
+    case "quiz":
+      return <AdminQuiz key={route.sub} sub={route.sub} showToast={showToast} />;
+    case "news":
+      return <AdminNews showToast={showToast} />;
+    case "orders": {
+      const status = route.status && ORDER_STATUSES.includes(route.status) ? (route.status as CanvasOrderStatus) : "all";
+      return <AdminOrders key={status} initialStatus={status} showToast={showToast} />;
+    }
+    case "artworks": {
+      const filter = ARTWORK_FILTERS.find((f) => f.id === route.filter)?.id as ArtworkFilter | undefined;
+      return <AdminArtworks key={filter ?? "pending"} initialFilter={filter} showToast={showToast} />;
+    }
+    case "inbox":
+      return (
+        <AdminInbox
+          showToast={showToast}
+          onThreadsChanged={refreshUnread}
+          onUnreadCleared={onUnreadCleared}
+          initialUserId={route.userId}
+          onOpenChange={(userId) => {
+            // Keep the link in step without remounting the inbox.
+            const hash = userId ? `#inbox/${encodeURIComponent(userId)}` : "#inbox";
+            if (window.location.hash !== hash) history.replaceState(history.state, "", hash);
+          }}
+        />
+      );
+    case "insights":
+      return <AdminInsights />;
+  }
 }

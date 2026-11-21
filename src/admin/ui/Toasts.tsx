@@ -6,6 +6,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export type ToastVariant = "default" | "link" | "error";
 export type ShowToast = (message: string, variant?: ToastVariant) => void;
 
+/** The app's Toast shape, for the ported sections' prop types. */
+export interface ToastState {
+  id: number;
+  message: string;
+  variant?: ToastVariant;
+}
+
 interface Toast {
   id: number;
   message: string;

@@ -35,13 +35,10 @@ const adminCsp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  [
-    "img-src 'self' data: blob:",
-    "https://*.amazonaws.com https://*.cloudfront.net",
-    "https://commons.wikimedia.org https://upload.wikimedia.org https://wsrv.nl",
-    "https://*.googleusercontent.com",
-    supabaseUrl,
-  ].join(" "),
+  // Any https image: catalog works come from S3, CloudFront, Wikimedia, wsrv.nl and the
+  // museums' own hosts, and a News post's image can be any URL the editor pastes.
+  // Images can't run code; scripts and connections stay locked down below.
+  "img-src 'self' data: blob: https:",
   "font-src 'self'",
   `connect-src 'self' ${supabaseUrl} ${supabaseUrl.replace(/^http/, "ws")} ${apiUrl}${dev ? " ws:" : ""}`,
   "frame-ancestors 'none'",
