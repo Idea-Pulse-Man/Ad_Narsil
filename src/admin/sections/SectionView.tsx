@@ -42,7 +42,12 @@ const ORDER_STATUSES: readonly string[] = [
 export function SectionView({ route, navigate, showToast, refreshUnread, onUnreadCleared }: SectionProps) {
   switch (route.section) {
     case "overview":
-      return <AdminOverview onJumpToOrders={(status) => navigate({ section: "orders", status: status === "all" ? null : status })} />;
+      return (
+        <AdminOverview
+          onJumpToOrders={(status) => navigate({ section: "orders", status: status === "all" ? null : status })}
+          onJumpToPending={() => navigate({ section: "artworks", filter: "pending" })}
+        />
+      );
     case "users":
       return <AdminUsers showToast={showToast} />;
     case "quiz":

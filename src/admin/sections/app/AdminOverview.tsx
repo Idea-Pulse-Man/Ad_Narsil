@@ -1,53 +1,46 @@
 "use client";
 
-// Ported from museum-app/src/components/AdminOverview.tsx — the app's admin is the spec (admin brief §1).
-// Web changes only: imports, the admin session in place of useAppState, window.open in place of
-// Capacitor Browser, a plain lazy image in place of BlurImage, no member catalog to refresh.
+// Ported from museum-app/src/components/AdminOverview.tsx — the app's admin is the spec (admin brief §1):
+// the same numbers and sections. Web changes: laid out as a desktop dashboard — a KPI row led by one
+// hero figure, one range filter above both charts, charts drawn at their card's measured width (the
+// app's fixed 360×200 viewBox shrank to a strip on wide screens) with a crosshair readout, arrow-key
+// reading and a table view, and alerts that link to the screen that fixes them.
 
-/**
- * Admin dashboard — Overview. First board is Narsil membership (registered
- * members only), then one Sign-in + Sign-up chart (members only, two colors)
- * with range chips (7D–1Y), then subscriptions with the same range controls.
- */
-
-import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  fetchAdminStats,
-  type AdminDayCount,
-  type AdminStats,
-} from "../../lib/admin";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type RefObject } from "react";
+import { fetchAdminStats, type AdminDayCount, type AdminStats } from "../../lib/admin";
 import type { CanvasOrderStatus } from "../../lib/orders";
-import {
-  AdminCard,
-  AdminSection,
-  AdminState,
-  StatusBadge,
-  fmtMoney,
-} from "./admin-ui";
+import { AdminState, StatusBadge, fmtMoney } from "./admin-ui";
 
 interface AdminOverviewProps {
   onJumpToOrders: (status: CanvasOrderStatus | "all") => void;
+  /** Artworks → Pending. */
+  onJumpToPending: () => void;
 }
 
 type ChartRange = 7 | 14 | 30 | 60 | 90 | 180 | 365;
 
-/** Compact labels: days → D, months → M, year → Y (one scrollable row). */
-const RANGE_OPTIONS: { id: ChartRange; label: string }[] = [
-  { id: 7, label: "7D" },
-  { id: 14, label: "14D" },
-  { id: 30, label: "1M" },
-  { id: 60, label: "2M" },
-  { id: 90, label: "3M" },
-  { id: 180, label: "6M" },
-  { id: 365, label: "1Y" },
+const RANGE_OPTIONS: { id: ChartRange; label: string; title: string }[] = [
+  { id: 7, label: "7D", title: "Last 7 days" },
+  { id: 14, label: "14D", title: "Last 14 days" },
+  { id: 30, label: "1M", title: "Last month" },
+  { id: 60, label: "2M", title: "Last 2 months" },
+  { id: 90, label: "3M", title: "Last 3 months" },
+  { id: 180, label: "6M", title: "Last 6 months" },
+  { id: 365, label: "1Y", title: "Last year" },
 ];
 
-export default function AdminOverview({ onJumpToOrders }: AdminOverviewProps) {
+// Series colours, checked with the dataviz palette validator (dark mode, all pairs) on the card
+// surface: lightness band, chroma, colour-blind separation and 3:1 contrast all pass.
+const BLUE = "#3987e5"; // member sign-ins
+const AMBER = "#c98500"; // member sign-ups
+const AQUA = "#199e70"; // new Guild subscriptions
+/** The card surface (ink + 4% white), used for the ring around markers. */
+const SURFACE = "#1d1a18";
+
+export default function AdminOverview(props: AdminOverviewProps) {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activityRange, setActivityRange] = useState<ChartRange>(14);
-  const [subRange, setSubRange] = useState<ChartRange>(14);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -67,232 +60,267 @@ export default function AdminOverview({ onJumpToOrders }: AdminOverviewProps) {
 
   if (loading || error || !stats) {
     return (
-      <div className="mt-6">
-        <AdminState
-          loading={loading}
-          error={error}
-          empty={!stats}
-          emptyLabel="No stats available."
-          onRetry={() => void load()}
-        />
-      </div>
+      <AdminState
+        loading={loading}
+        error={error}
+        empty={!stats}
+        emptyLabel="No stats available."
+        onRetry={() => void load()}
+      />
     );
   }
+
+  return <OverviewBoard stats={stats} {...props} />;
+}
+
+/** The board itself, given the stats (admin_stats). */
+export function OverviewBoard({ stats, onJumpToOrders, onJumpToPending }: AdminOverviewProps & { stats: AdminStats }) {
+  const [range, setRange] = useState<ChartRange>(14);
 
   const usersToday = stats.users_today ?? 0;
   const usersYesterday = stats.users_yesterday ?? 0;
   const usersDelta = stats.users_delta ?? usersToday - usersYesterday;
-  const guestsTotal = stats.guests ?? 0;
+  const guests = stats.guests ?? 0;
   const guestsToday = stats.guests_today ?? 0;
-  const signinsMembersToday = stats.signins_members_today ?? 0;
+  const signinsToday = stats.signins_members_today ?? 0;
   const signinsDelta = stats.signins_delta ?? 0;
   const subsActive = stats.subscribers_active ?? 0;
   const subsToday = stats.subscribers_today ?? 0;
   const subsYesterday = stats.subscribers_yesterday ?? 0;
+  const pending = stats.pending_approvals ?? 0;
 
-  const pipeline = Object.entries(stats.orders_by_status).sort(
-    (a, b) => b[1] - a[1],
-  );
+  const activity = alignDays([stats.signins_by_day ?? [], stats.signups_by_day ?? []], range);
+  const subscriptions = alignDays([stats.subscriptions_by_day ?? []], range);
+  const pipeline = Object.entries(stats.orders_by_status).sort((a, b) => b[1] - a[1]);
 
   return (
-    <>
-      <section className="mt-6">
-        <AdminCard className="bg-gradient-to-br from-white/[0.07] to-white/[0.02]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
-            Narsil
-          </p>
-          <p className="mt-2 font-serif text-4xl text-white">{stats.users}</p>
-          <p className="mt-1 text-sm text-white/55">Total members</p>
-          <p className="mt-0.5 text-[11px] text-white/50">
-            Registered accounts only · guests excluded
-          </p>
-          <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-            <DeltaPill
-              label="vs yesterday"
-              delta={usersDelta}
-              hint={`Today ${usersToday} · Yesterday ${usersYesterday}`}
-            />
-            <span className="rounded-full border border-sky-400/25 bg-sky-400/10 px-3 py-1 text-xs text-sky-100">
-              Today new · {usersToday}
-            </span>
-            <span className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/60">
-              Guests · {guestsTotal}
-              {guestsToday > 0 ? ` (+${guestsToday} today)` : ""}
-            </span>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-white/50">
-            <span>
-              Sign-ins today ·{" "}
-              <span className="text-sky-200">{signinsMembersToday} members</span>
-              {signinsDelta !== 0 && (
-                <span className={signinsDelta > 0 ? " text-emerald-300" : " text-red-300"}>
-                  {" "}
-                  ({fmtDelta(signinsDelta)} vs yesterday)
-                </span>
-              )}
-            </span>
-          </div>
-        </AdminCard>
-      </section>
-
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        <Stat label="New members today" value={usersToday} />
-        <Stat label="New yesterday" value={usersYesterday} />
-        <Stat label="Guild (Pro)" value={subsActive} />
-        <Stat label="New Pro today" value={subsToday} />
-      </div>
-
-      {(stats.needs_attention > 0 || (stats.pending_approvals ?? 0) > 0) && (
-        <div className="mt-4 space-y-2">
+    <div className="space-y-10">
+      {(stats.needs_attention > 0 || pending > 0) && (
+        <div className="grid gap-3 md:grid-cols-2">
           {stats.needs_attention > 0 && (
-            <button
-              type="button"
+            <AlertButton
+              tone="critical"
+              label={`${stats.needs_attention} canvas ${plural(stats.needs_attention, "order needs", "orders need")} fulfilment`}
+              action="Open Canvas"
               onClick={() => onJumpToOrders("fulfillment_failed")}
-              className="flex w-full items-center justify-between rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3.5 text-left"
-            >
-              <span className="text-sm text-red-100">
-                {stats.needs_attention} order
-                {stats.needs_attention === 1 ? "" : "s"} need fulfilment
-              </span>
-              <span className="text-red-200/60">›</span>
-            </button>
+            />
           )}
-          {(stats.pending_approvals ?? 0) > 0 && (
-            <div className="rounded-2xl border border-amber-300/25 bg-amber-400/10 px-4 py-3.5 text-sm text-amber-100">
-              {stats.pending_approvals} upload
-              {stats.pending_approvals === 1 ? "" : "s"} waiting for approval —
-              open Artworks → Pending.
-            </div>
+          {pending > 0 && (
+            <AlertButton
+              tone="warning"
+              label={`${pending} ${plural(pending, "upload is", "uploads are")} waiting for approval`}
+              action="Review"
+              onClick={onJumpToPending}
+            />
           )}
         </div>
       )}
 
-      <AdminSection
-        title="Sign-in & sign-up"
-        hint="Members only · blue = sign-in · amber = sign-up · teal = same count both · guests excluded."
-      >
-        <RangeTabs value={activityRange} onChange={setActivityRange} />
-        <div className="mt-3">
-          <SigninSignupLineChart
-            signins={stats.signins_by_day ?? []}
-            signups={stats.signups_by_day ?? []}
-            days={activityRange}
-            empty="No member activity in this window."
-          />
-        </div>
-      </AdminSection>
-
-      <AdminSection
-        title="Subscriptions"
-        hint={`New Guild rows per day · today ${subsToday} · yesterday ${subsYesterday}.`}
-      >
-        <RangeTabs value={subRange} onChange={setSubRange} />
-        <div className="mt-3">
-          <DayChart
-            series={sliceDays(stats.subscriptions_by_day ?? [], subRange)}
-            days={subRange}
-            empty="No new subscriptions in this window."
-            tone="gold"
-            title="Subscriptions"
-            subtitle={`New Guild rows per day · ${rangeTitle(subRange).toLowerCase()}.`}
-            totalLabel={`${rangeCaption(subRange)} total`}
-          />
-        </div>
-      </AdminSection>
-
-      <AdminSection title="Catalog">
-        <div className="grid grid-cols-2 gap-3">
-          <Stat label="Artworks" value={stats.artworks} />
-          <Stat label="Pending" value={stats.pending_approvals ?? 0} />
-          <Stat label="Featured" value={stats.featured} />
-          <Stat label="Hidden" value={stats.hidden} />
-        </div>
-      </AdminSection>
-
-      <AdminSection
-        title="Canvas revenue"
-        hint="Paid, submitted, shipped and completed orders."
-      >
-        <div className="grid grid-cols-2 gap-3">
-          <Stat label="Gross" value={fmtMoney(stats.revenue)} />
-          <Stat label="Orders" value={stats.orders} />
-          <Stat label="Artist payouts" value={fmtMoney(stats.artist_payout)} />
-          <Stat label="Platform cut" value={fmtMoney(stats.platform_cut)} />
-        </div>
-      </AdminSection>
-
-      <AdminSection title="Order pipeline">
-        {pipeline.length === 0 ? (
-          <p className="text-sm text-white/50">No orders yet.</p>
-        ) : (
-          <div className="space-y-2">
-            {pipeline.map(([status, count]) => (
-              <button
-                key={status}
-                type="button"
-                onClick={() => onJumpToOrders(status as CanvasOrderStatus)}
-                className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-left"
-              >
-                <StatusBadge status={status} />
-                <span className="text-sm text-white/70">{count}</span>
-              </button>
-            ))}
+      <section aria-label="Members" className="grid grid-cols-2 gap-3 xl:grid-cols-3">
+        <div className="col-span-2 flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-5 xl:col-span-1 xl:row-span-2">
+          <div>
+            <p className="text-sm text-white/60">Total members</p>
+            <p className="mt-3 text-5xl font-semibold leading-none tracking-tight text-white">
+              {fmtCount(stats.users)}
+            </p>
+            <p className="mt-3 text-xs text-white/45">Registered accounts only — guests excluded.</p>
           </div>
+          <p className="mt-6 border-t border-white/8 pt-3 text-sm text-white/60">
+            <span className="font-semibold text-white">{fmtCount(stats.new_users_7d)}</span> new in the last 7 days
+          </p>
+        </div>
+        <StatTile label="New members today" value={usersToday} delta={usersDelta} note={`${usersYesterday} yesterday`} />
+        <StatTile label="Member sign-ins today" value={signinsToday} delta={signinsDelta} />
+        <StatTile label="Guild members" value={subsActive} note={`+${subsToday} today · +${subsYesterday} yesterday`} />
+        <StatTile
+          label="Guests"
+          value={guests}
+          note={guestsToday > 0 ? `+${guestsToday} today · not counted as members` : "Not counted as members"}
+        />
+      </section>
+
+      <section aria-labelledby="overview-activity">
+        <SectionHeading id="overview-activity" title="Activity" hint="Members only — guests excluded. Days are UTC." />
+        <RangeTabs value={range} onChange={setRange} />
+        <div className="mt-4 grid gap-3 xl:grid-cols-2">
+          <ChartCard
+            title="Sign-ins and sign-ups"
+            days={activity.days}
+            series={[
+              { id: "signins", kind: "line", label: "Sign-ins", noun: ["sign-in", "sign-ins"], color: BLUE, values: activity.values[0] ?? [] },
+              // Sign-ups as columns under the sign-in line: on a day the two counts tie, both stay visible.
+              { id: "signups", kind: "bar", label: "Sign-ups", noun: ["sign-up", "sign-ups"], color: AMBER, values: activity.values[1] ?? [] },
+            ]}
+          />
+          <ChartCard
+            title="New Guild subscriptions"
+            days={subscriptions.days}
+            series={[
+              {
+                id: "subscriptions",
+                kind: "bar",
+                label: "New subscriptions",
+                noun: ["new subscription", "new subscriptions"],
+                color: AQUA,
+                values: subscriptions.values[0] ?? [],
+              },
+            ]}
+          />
+        </div>
+      </section>
+
+      <div className="grid gap-10 xl:grid-cols-2">
+        <section aria-labelledby="overview-catalog">
+          <SectionHeading id="overview-catalog" title="Catalog" hint="Works in the member catalog." />
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <StatTile label="Artworks" value={stats.artworks} />
+            <StatTile label="Pending approval" value={pending} />
+            <StatTile label="Featured" value={stats.featured} />
+            <StatTile label="Hidden" value={stats.hidden} />
+          </div>
+        </section>
+
+        <section aria-labelledby="overview-revenue">
+          <SectionHeading id="overview-revenue" title="Canvas revenue" hint="Paid, submitted, shipped and completed orders." />
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <StatTile label="Gross" value={fmtMoney(stats.revenue)} />
+            <StatTile label="Orders" value={stats.orders} />
+            <StatTile label="Artist payouts" value={fmtMoney(stats.artist_payout)} />
+            <StatTile label="Platform cut" value={fmtMoney(stats.platform_cut)} />
+          </div>
+        </section>
+      </div>
+
+      <section aria-labelledby="overview-pipeline">
+        <SectionHeading id="overview-pipeline" title="Order pipeline" hint="Canvas orders by status — open one to see its orders." />
+        {pipeline.length === 0 ? (
+          <p className="mt-4 text-sm text-white/50">No orders yet.</p>
+        ) : (
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {pipeline.map(([status, count]) => (
+              <li key={status}>
+                <button
+                  type="button"
+                  onClick={() => onJumpToOrders(status as CanvasOrderStatus)}
+                  className="flex w-full items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3 text-left transition-colors hover:border-white/20 hover:bg-white/[0.06]"
+                >
+                  <StatusBadge status={status} />
+                  <span className="text-lg font-semibold text-white">{fmtCount(count)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
-      </AdminSection>
+      </section>
+    </div>
+  );
+}
+
+// ── Figures ────────────────────────────────────────────────────────────────
+
+function SectionHeading({ id, title, hint }: { id: string; title: string; hint: string }) {
+  return (
+    <>
+      <h2 id={id} className="font-serif text-xl text-white">
+        {title}
+      </h2>
+      <p className="mt-1 text-xs text-white/50">{hint}</p>
     </>
   );
 }
 
-function fmtDelta(n: number): string {
-  if (n > 0) return `+${n}`;
-  return String(n);
-}
-
-function DeltaPill({
+function StatTile({
   label,
+  value,
   delta,
-  hint,
+  note,
 }: {
   label: string;
-  delta: number;
-  hint: string;
+  value: number | string;
+  /** Signed change vs yesterday; up is good. */
+  delta?: number;
+  note?: string;
 }) {
-  const tone =
-    delta > 0
-      ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"
-      : delta < 0
-        ? "border-red-400/30 bg-red-400/10 text-red-200"
-        : "border-white/12 bg-white/[0.04] text-white/60";
   return (
-    <span
-      title={hint}
-      className={`rounded-full border px-3 py-1 text-xs font-medium ${tone}`}
-    >
-      {label} {fmtDelta(delta)}
+    <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4">
+      <p className="text-sm text-white/60">{label}</p>
+      <p className="mt-2 text-3xl font-semibold leading-none tracking-tight text-white">
+        {typeof value === "number" ? fmtCount(value) : value}
+      </p>
+      {(delta !== undefined || note) && (
+        <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/50">
+          {delta !== undefined && <Delta value={delta} />}
+          {delta !== undefined && note && <span aria-hidden>·</span>}
+          {note && <span>{note}</span>}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function Delta({ value }: { value: number }) {
+  if (value === 0) return <span>Same as yesterday</span>;
+  const up = value > 0;
+  return (
+    <span className={`inline-flex items-center gap-1 font-medium ${up ? "text-emerald-300" : "text-red-300"}`}>
+      <span aria-hidden className="text-[9px]">
+        {up ? "▲" : "▼"}
+      </span>
+      {up ? "+" : "−"}
+      {Math.abs(value)} vs yesterday
     </span>
   );
 }
 
-function RangeTabs({
-  value,
-  onChange,
+function AlertButton({
+  tone,
+  label,
+  action,
+  onClick,
 }: {
-  value: ChartRange;
-  onChange: (next: ChartRange) => void;
+  tone: "critical" | "warning";
+  label: string;
+  action: string;
+  onClick: () => void;
 }) {
+  const box =
+    tone === "critical"
+      ? "border-red-400/30 bg-red-500/10 text-red-100 hover:bg-red-500/15"
+      : "border-amber-300/30 bg-amber-400/10 text-amber-100 hover:bg-amber-400/15";
+  const icon = tone === "critical" ? "bg-red-400/25" : "bg-amber-300/25";
   return (
-    <div className="-mx-1 flex flex-nowrap gap-1.5 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left text-sm transition-colors ${box}`}
+    >
+      <span className="flex items-center gap-2.5">
+        <span aria-hidden className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-[11px] font-bold ${icon}`}>
+          !
+        </span>
+        {label}
+      </span>
+      <span className="shrink-0 text-xs font-medium opacity-80">{action} →</span>
+    </button>
+  );
+}
+
+// ── Charts ─────────────────────────────────────────────────────────────────
+
+/** The one filter row: it scopes both charts below it. */
+function RangeTabs({ value, onChange }: { value: ChartRange; onChange: (next: ChartRange) => void }) {
+  return (
+    <div role="group" aria-label="Chart range" className="mt-4 flex flex-wrap gap-1.5">
       {RANGE_OPTIONS.map((opt) => (
         <button
           key={opt.id}
           type="button"
-          title={rangeTitle(opt.id)}
+          title={opt.title}
+          aria-label={opt.title}
+          aria-pressed={value === opt.id}
           onClick={() => onChange(opt.id)}
-          className={`shrink-0 rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-colors ${
-            value === opt.id
-              ? "bg-white text-ink"
-              : "border border-white/12 text-white/60"
+          className={`rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide transition-colors ${
+            value === opt.id ? "bg-white text-ink" : "border border-white/12 text-white/60 hover:border-white/25 hover:text-canvas"
           }`}
         >
           {opt.label}
@@ -302,511 +330,385 @@ function RangeTabs({
   );
 }
 
-function dayMembers(p: AdminDayCount): number {
+interface Series {
+  id: string;
+  /** Columns for rare daily events, a line for the steady one. Columns draw first, lines on top. */
+  kind: "bar" | "line";
+  label: string;
+  /** Singular / plural, for the totals line. */
+  noun: [string, string];
+  color: string;
+  values: number[];
+}
+
+const PAD_T = 12;
+const PLOT_H = 176;
+const AXIS_H = 26;
+const PAD_L = 36;
+const PAD_R = 14;
+const CHART_H = PAD_T + PLOT_H + AXIS_H;
+const TIP_W = 176;
+
+function ChartCard({ title, days, series }: { title: string; days: string[]; series: Series[] }) {
+  const [table, setTable] = useState(false);
+  const n = days.length;
+  const span = n === 0 ? "No data" : n === 1 ? fmtDay(days[0]!) : `${fmtDay(days[0]!)} – ${fmtDay(days[n - 1]!)}`;
+
+  return (
+    <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold text-white">{title}</h3>
+          <p className="mt-0.5 text-xs text-white/45">{span}</p>
+        </div>
+        {n > 0 && (
+          <button
+            type="button"
+            onClick={() => setTable((t) => !t)}
+            aria-pressed={table}
+            className="shrink-0 rounded-full border border-white/12 px-3 py-1 text-[11px] font-medium text-white/60 transition-colors hover:border-white/25 hover:text-canvas"
+          >
+            {table ? "Show chart" : "Show table"}
+          </button>
+        )}
+      </div>
+
+      {/* Totals for the range; with two series it is also the legend (keys mirror the marks). */}
+      <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
+        {series.map((s) => {
+          const total = s.values.reduce((a, b) => a + b, 0);
+          return (
+            <li key={s.id} className="flex items-center gap-2 text-xs text-white/55">
+              {series.length > 1 && (
+                <span
+                  aria-hidden
+                  className={s.kind === "bar" ? "h-2.5 w-2.5 rounded-[3px]" : "h-0.5 w-4 rounded-full"}
+                  style={{ backgroundColor: s.color }}
+                />
+              )}
+              <span className="text-lg font-semibold leading-none text-white">{fmtCount(total)}</span>
+              {total === 1 ? s.noun[0] : s.noun[1]}
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="mt-4">
+        {n === 0 ? (
+          <p className="flex items-center justify-center text-sm text-white/45" style={{ height: CHART_H }}>
+            No data for this range.
+          </p>
+        ) : table ? (
+          <ChartTable caption={title} days={days} series={series} />
+        ) : (
+          <DayChart label={title} days={days} series={series} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** One day per band: columns sit in the band, line points at its centre, one shared y-axis. */
+function DayChart({ label, days, series }: { label: string; days: string[]; series: Series[] }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const width = useElementWidth(wrapRef);
+  const [active, setActive] = useState<number | null>(null);
+
+  const n = days.length;
+  const last = n - 1;
+  const { max, step } = niceScale(Math.max(0, ...series.flatMap((s) => s.values)));
+  const ticks: number[] = [];
+  for (let t = 0; t <= max; t += step) ticks.push(t);
+
+  const plotW = Math.max(1, width - PAD_L - PAD_R);
+  const band = plotW / Math.max(1, n);
+  const x = (i: number) => PAD_L + band * (i + 0.5);
+  const y = (v: number) => PAD_T + PLOT_H - (v / max) * PLOT_H;
+  const baseline = y(0);
+  const labels = axisLabelIndices(n, Math.floor(plotW / 76));
+  // ≤ 24px, and never the whole band: the rest is the gap between columns.
+  const barW = Math.min(24, Math.max(1, band * 0.62));
+  const bars = series.filter((s) => s.kind === "bar");
+  const lines = series.filter((s) => s.kind === "line");
+
+  // Value at the end of each line — unless two would collide (then legend, tooltip and table carry it).
+  const ends = lines.map((s) => ({ id: s.id, v: s.values[last] ?? 0 }));
+  const endLabelsFit = ends.every((a, i) => ends.every((b, j) => j <= i || Math.abs(y(a.v) - y(b.v)) >= 16));
+
+  const indexAt = (clientX: number): number => {
+    const el = wrapRef.current;
+    if (!el) return 0;
+    const px = clientX - el.getBoundingClientRect().left;
+    return Math.min(last, Math.max(0, Math.floor((px - PAD_L) / band)));
+  };
+
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const current = active ?? last;
+    let next: number | null = null;
+    if (e.key === "ArrowLeft") next = Math.max(0, current - 1);
+    else if (e.key === "ArrowRight") next = Math.min(last, current + 1);
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = last;
+    else if (e.key === "Escape") setActive(null);
+    if (next === null) return;
+    e.preventDefault();
+    setActive(next);
+  };
+
+  const readout =
+    active === null
+      ? ""
+      : `${fmtDay(days[active]!, true)}: ${series.map((s) => `${s.values[active] ?? 0} ${s.label.toLowerCase()}`).join(", ")}`;
+  const tipLeft = active === null ? 0 : x(active) + 12 + TIP_W <= width ? x(active) + 12 : Math.max(0, x(active) - 12 - TIP_W);
+
+  return (
+    <div
+      ref={wrapRef}
+      tabIndex={0}
+      role="group"
+      aria-label={`${label} chart. Use the arrow keys to read each day.`}
+      onPointerMove={(e) => setActive(indexAt(e.clientX))}
+      onPointerLeave={() => setActive(null)}
+      onKeyDown={onKeyDown}
+      onBlur={() => setActive(null)}
+      className="relative w-full min-w-0 touch-pan-y select-none rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+      style={{ height: CHART_H }}
+    >
+      {width > 0 && (
+        // Drawn in measured pixels (crisp 11px text), but sized 100% so it can never push or overflow
+        // its card — between a resize and the next measurement it just scales a touch.
+        <svg viewBox={`0 0 ${width} ${CHART_H}`} width="100%" height={CHART_H} aria-hidden="true" className="block">
+          {ticks.map((t) => (
+            <g key={t}>
+              <line
+                x1={PAD_L}
+                x2={width - PAD_R}
+                y1={y(t)}
+                y2={y(t)}
+                stroke={t === 0 ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.07)"}
+                shapeRendering="crispEdges"
+              />
+              <text x={PAD_L - 10} y={y(t)} dy="0.32em" textAnchor="end" className="fill-white/40 text-[11px] tabular-nums">
+                {fmtCount(t)}
+              </text>
+            </g>
+          ))}
+
+          {labels.map((i) => {
+            // The first and last labels hug the plot edges so they never run off the card.
+            const edge = n > 1 && (i === 0 || i === last);
+            return (
+              <text
+                key={i}
+                x={edge ? (i === 0 ? PAD_L : width - PAD_R) : x(i)}
+                y={PAD_T + PLOT_H + 18}
+                textAnchor={edge ? (i === 0 ? "start" : "end") : "middle"}
+                className="fill-white/40 text-[11px]"
+              >
+                {fmtDay(days[i]!)}
+              </text>
+            );
+          })}
+
+          {active !== null && (
+            <line x1={x(active)} x2={x(active)} y1={PAD_T} y2={baseline} stroke="rgba(255,255,255,0.3)" shapeRendering="crispEdges" />
+          )}
+
+          {bars.map((s, k) => {
+            const each = barW / bars.length;
+            return (
+              <g key={s.id} fill={s.color}>
+                {s.values.map((v, i) =>
+                  v > 0 ? (
+                    <path
+                      key={days[i]}
+                      d={columnPath(x(i) - barW / 2 + each * (k + 0.5), each, y(v), baseline)}
+                      opacity={active === null || active === i ? 1 : 0.45}
+                    />
+                  ) : null,
+                )}
+              </g>
+            );
+          })}
+
+          {lines.map((s) => (
+            <path
+              key={s.id}
+              d={linePath(s.values, x, y)}
+              fill="none"
+              stroke={s.color}
+              strokeWidth={2}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          ))}
+          {lines.map((s) => {
+            const i = active ?? last;
+            return <circle key={s.id} cx={x(i)} cy={y(s.values[i] ?? 0)} r={4} fill={s.color} stroke={SURFACE} strokeWidth={2} />;
+          })}
+          {active === null &&
+            endLabelsFit &&
+            ends.map(({ id, v }) => (
+              <text key={id} x={x(last) - 9} y={y(v) - 9} textAnchor="end" className="fill-white/80 text-[11px] font-semibold tabular-nums">
+                {fmtCount(v)}
+              </text>
+            ))}
+        </svg>
+      )}
+
+      {active !== null && width > 0 && (
+        <div
+          className="pointer-events-none absolute z-10 rounded-xl border border-white/12 bg-[#28221e]/95 px-3 py-2 shadow-xl"
+          style={{ width: TIP_W, top: PAD_T, left: tipLeft }}
+        >
+          <p className="text-[11px] text-white/50">{fmtDay(days[active]!, true)}</p>
+          <ul className="mt-1 space-y-1">
+            {series.map((s) => (
+              <li key={s.id} className="flex items-center gap-2 text-xs">
+                <span aria-hidden className="h-0.5 w-3 shrink-0 rounded-full" style={{ backgroundColor: s.color }} />
+                <span className="font-semibold tabular-nums text-white">{fmtCount(s.values[active] ?? 0)}</span>
+                <span className="truncate text-white/55">{s.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <p className="sr-only" aria-live="polite">
+        {readout}
+      </p>
+    </div>
+  );
+}
+
+/** The chart's table twin: every value without hovering, newest day first. */
+function ChartTable({ caption, days, series }: { caption: string; days: string[]; series: Series[] }) {
+  const rows = days.map((day, i) => ({ day, i })).reverse();
+  return (
+    <div className="overflow-y-auto rounded-lg border border-white/8" style={{ height: CHART_H }}>
+      <table className="w-full text-left text-xs">
+        <caption className="sr-only">{caption}</caption>
+        <thead className="sticky top-0 bg-[#231e1b] text-white/50">
+          <tr>
+            <th scope="col" className="px-3 py-2 font-medium">
+              Day (UTC)
+            </th>
+            {series.map((s) => (
+              <th key={s.id} scope="col" className="px-3 py-2 text-right font-medium">
+                {s.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-white/5 text-white/80">
+          {rows.map(({ day, i }) => (
+            <tr key={day}>
+              <th scope="row" className="px-3 py-1.5 font-normal text-white/60">
+                {fmtDay(day, true)}
+              </th>
+              {series.map((s) => (
+                <td key={s.id} className="px-3 py-1.5 text-right tabular-nums">
+                  {fmtCount(s.values[i] ?? 0)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+/** The element's width: measured before the first paint, then kept in step on resize. */
+function useElementWidth(ref: RefObject<HTMLElement | null>): number {
+  const [width, setWidth] = useState(0);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => setWidth(Math.round(el.getBoundingClientRect().width));
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+  return width;
+}
+
+// ── Data helpers ───────────────────────────────────────────────────────────
+
+function dayCount(p: AdminDayCount): number {
   if (typeof p.members === "number") return p.members;
   return Number(p.count) || 0;
 }
 
-function sliceDays(series: AdminDayCount[], days: number): AdminDayCount[] {
-  if (!series.length) return [];
-  const sorted = [...series].sort((a, b) => a.day.localeCompare(b.day));
-  return sorted.slice(Math.max(0, sorted.length - days));
-}
-
-function rangeCaption(days: ChartRange): string {
-  return RANGE_OPTIONS.find((o) => o.id === days)?.label ?? `${days}D`;
-}
-
-function rangeTitle(days: ChartRange): string {
-  switch (days) {
-    case 7:
-      return "Last 7 days";
-    case 14:
-      return "Last 14 days";
-    case 30:
-      return "Last 1 month";
-    case 60:
-      return "Last 2 months";
-    case 90:
-      return "Last 3 months";
-    case 180:
-      return "Last 6 months";
-    case 365:
-      return "Last 1 year";
-    default:
-      return `Last ${days} days`;
-  }
-}
-
-type ActivityDay = { day: string; signins: number; signups: number };
-
-function mergeMemberActivity(
-  signins: AdminDayCount[],
-  signups: AdminDayCount[],
-  days: ChartRange,
-): ActivityDay[] {
-  const byDay = new Map<string, ActivityDay>();
-  for (const p of sliceDays(signins, days)) {
-    byDay.set(p.day, { day: p.day, signins: dayMembers(p), signups: 0 });
-  }
-  for (const p of sliceDays(signups, days)) {
-    const prev = byDay.get(p.day);
-    const up = dayMembers(p);
-    if (prev) prev.signups = up;
-    else byDay.set(p.day, { day: p.day, signins: 0, signups: up });
-  }
-  return [...byDay.values()].sort((a, b) => a.day.localeCompare(b.day));
-}
-
-/** Members only: blue = sign-in, amber = sign-up. Guests excluded. */
-function SigninSignupLineChart({
-  signins,
-  signups,
-  days,
-  empty,
-}: {
-  signins: AdminDayCount[];
-  signups: AdminDayCount[];
-  days: ChartRange;
-  empty: string;
-}) {
-  const series = useMemo(
-    () => mergeMemberActivity(signins, signups, days),
-    [signins, signups, days],
-  );
-
-  if (!series.length) {
-    return <p className="text-sm text-white/50">{empty}</p>;
-  }
-
-  const inVals = series.map((p) => p.signins);
-  const upVals = series.map((p) => p.signups);
-  const rawMax = Math.max(1, ...inVals, ...upVals);
-  const max = niceCeil(rawMax);
-  const inTotal = inVals.reduce((a, b) => a + b, 0);
-  const upTotal = upVals.reduce((a, b) => a + b, 0);
-
-  const W = 360;
-  const H = 200;
-  const padL = 36;
-  const padR = 12;
-  const padT = 16;
-  const padB = 32;
-  const plotW = W - padL - padR;
-  const plotH = H - padT - padB;
-  const n = series.length;
-  const step = n <= 1 ? 0 : plotW / (n - 1);
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((t) => Math.round(max * t));
-  const axisLabelIndices = pickAxisLabelIndices(
-    series.map((p) => p.day),
-    days,
-  );
-  const baseline = padT + plotH;
-
-  const pts = (values: number[]) =>
-    values.map((v, i) => ({
-      x: padL + i * step,
-      y: padT + plotH - (v / max) * plotH,
-    }));
-
-  const inPts = pts(inVals);
-  const upPts = pts(upVals);
-  const inLine = smoothLinePath(inPts);
-  const upLine = smoothLinePath(upPts);
-  const inArea = areaPath(inPts, baseline);
-  const upArea = areaPath(upPts, baseline);
-
-  return (
-    <AdminCard className="!p-0 overflow-hidden">
-      <div className="flex items-start justify-between gap-3 px-4 pb-1 pt-4">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-white">Member activity</p>
-          <p className="mt-0.5 text-[11px] text-white/45">
-            Daily sign-in and sign-up · {rangeTitle(days).toLowerCase()}.
-          </p>
-          <p className="mt-1.5 text-[11px] text-white/55">
-            <span className="tabular-nums text-sky-200">{inTotal}</span> sign-ins
-            {" · "}
-            <span className="tabular-nums text-amber-200">{upTotal}</span> sign-ups
-          </p>
-        </div>
-        <span className="shrink-0 rounded-lg border border-white/12 bg-white/[0.04] px-2.5 py-1.5 text-[11px] text-white/70">
-          {rangeTitle(days)}
-        </span>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 pb-2 pt-2 text-[11px] text-white/50">
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-400" /> Sign-in
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Sign-up
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-teal-300" /> Equal
-        </span>
-      </div>
-
-      <div className="px-1 pb-3">
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="h-52 w-full"
-          role="img"
-          aria-label="Daily member sign-ins and signups"
-        >
-          <defs>
-            <linearGradient id="area-signin" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="area-signup" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-
-          {yTicks.map((tick) => {
-            const y = padT + plotH - (tick / max) * plotH;
-            return (
-              <g key={`y-${tick}`}>
-                <line
-                  x1={padL}
-                  x2={W - padR}
-                  y1={y}
-                  y2={y}
-                  stroke="rgba(255,255,255,0.12)"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                />
-                <text
-                  x={padL - 8}
-                  y={y + 3}
-                  textAnchor="end"
-                  fill="rgba(255,255,255,0.38)"
-                  fontSize="9"
-                  fontFamily="ui-sans-serif, system-ui, sans-serif"
-                >
-                  {tick}
-                </text>
-              </g>
-            );
-          })}
-
-          {inArea && (
-            <path d={inArea} fill="url(#area-signin)" stroke="none" />
-          )}
-          {upArea && (
-            <path d={upArea} fill="url(#area-signup)" stroke="none" />
-          )}
-          {inLine && (
-            <path
-              d={inLine}
-              fill="none"
-              stroke="#38bdf8"
-              strokeWidth="2.25"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-          )}
-          {upLine && (
-            <path
-              d={upLine}
-              fill="none"
-              stroke="#fbbf24"
-              strokeWidth="2"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-          )}
-
-          {series.map((p, i) => {
-            const si = inVals[i] ?? 0;
-            const su = upVals[i] ?? 0;
-            const same = si === su && si > 0;
-            const pin = inPts[i]!;
-            const showAxis = axisLabelIndices.has(i);
-            return (
-              <g key={p.day}>
-                <title>
-                  {same
-                    ? `${formatChartDay(p.day, true)}: ${si} (sign-in = sign-up)`
-                    : `${formatChartDay(p.day, true)}: ${si} sign-in, ${su} sign-up`}
-                </title>
-                {/* Invisible hit target for tooltip */}
-                <circle cx={pin.x} cy={pin.y} r={10} fill="transparent" />
-                {same && (
-                  <circle cx={pin.x} cy={pin.y} r={3} fill="#5eead4" />
-                )}
-                {showAxis && (
-                  <text
-                    x={pin.x}
-                    y={H - 8}
-                    textAnchor="middle"
-                    fill="rgba(255,255,255,0.4)"
-                    fontSize="9"
-                    fontFamily="ui-sans-serif, system-ui, sans-serif"
-                  >
-                    {formatAxisDay(p.day)}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-    </AdminCard>
-  );
-}
-
-function DayChart({
-  series,
-  days = 14,
-  empty,
-  tone,
-  title,
-  subtitle,
-  totalLabel = "14-day total",
-}: {
-  series: AdminDayCount[];
-  days?: ChartRange;
-  empty: string;
-  tone: "sky" | "gold";
-  title?: string;
-  subtitle?: string;
-  totalLabel?: string;
-}) {
-  if (!series.length) {
-    return <p className="text-sm text-white/50">{empty}</p>;
-  }
-
-  const values = series.map((p) => Number(p.count) || 0);
-  const rawMax = Math.max(1, ...values);
-  const max = niceCeil(rawMax);
-  const total = values.reduce((a, b) => a + b, 0);
-  const today = values[values.length - 1] ?? 0;
-  const axisLabelIndices = pickAxisLabelIndices(
-    series.map((p) => p.day),
-    days,
-  );
-
-  const W = 360;
-  const H = 200;
-  const padL = 36;
-  const padR = 12;
-  const padT = 16;
-  const padB = 32;
-  const plotW = W - padL - padR;
-  const plotH = H - padT - padB;
-  const n = series.length;
-  const step = n <= 1 ? 0 : plotW / (n - 1);
-  const baseline = padT + plotH;
-  const lineColor = tone === "sky" ? "#38bdf8" : "#e8c9a0";
-  const gradId = `area-day-${tone}`;
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((t) => Math.round(max * t));
-
-  const points = values.map((v, i) => ({
-    x: padL + i * step,
-    y: padT + plotH - (v / max) * plotH,
-  }));
-  const line = smoothLinePath(points);
-  const area = areaPath(points, baseline);
-
-  return (
-    <AdminCard className="!p-0 overflow-hidden">
-      <div className="flex items-start justify-between gap-3 px-4 pb-2 pt-4">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-white">
-            {title ?? "Overview"}
-          </p>
-          <p className="mt-0.5 text-[11px] text-white/45">
-            {subtitle ??
-              `Daily performance · ${rangeTitle(days).toLowerCase()}.`}
-          </p>
-          <p className="mt-1.5 text-[11px] text-white/55">
-            <span className="tabular-nums text-white/85">{total}</span>{" "}
-            {totalLabel}
-            {" · today "}
-            <span className="tabular-nums text-white/85">{today}</span>
-          </p>
-        </div>
-        <span className="shrink-0 rounded-lg border border-white/12 bg-white/[0.04] px-2.5 py-1.5 text-[11px] text-white/70">
-          {rangeTitle(days)}
-        </span>
-      </div>
-
-      <div className="px-1 pb-3">
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="h-52 w-full"
-          role="img"
-          aria-label="Daily activity chart"
-        >
-          <defs>
-            <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={lineColor} stopOpacity="0.38" />
-              <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-
-          {yTicks.map((tick) => {
-            const y = padT + plotH - (tick / max) * plotH;
-            return (
-              <g key={`y-${tick}`}>
-                <line
-                  x1={padL}
-                  x2={W - padR}
-                  y1={y}
-                  y2={y}
-                  stroke="rgba(255,255,255,0.12)"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                />
-                <text
-                  x={padL - 8}
-                  y={y + 3}
-                  textAnchor="end"
-                  fill="rgba(255,255,255,0.38)"
-                  fontSize="9"
-                  fontFamily="ui-sans-serif, system-ui, sans-serif"
-                >
-                  {tick}
-                </text>
-              </g>
-            );
-          })}
-
-          {area && <path d={area} fill={`url(#${gradId})`} stroke="none" />}
-          {line && (
-            <path
-              d={line}
-              fill="none"
-              stroke={lineColor}
-              strokeWidth="2.25"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-          )}
-
-          {series.map((p, i) => {
-            const pt = points[i]!;
-            const nVal = values[i] ?? 0;
-            const showAxis = axisLabelIndices.has(i);
-            return (
-              <g key={p.day}>
-                <title>{`${formatChartDay(p.day, true)}: ${nVal}`}</title>
-                <circle cx={pt.x} cy={pt.y} r={10} fill="transparent" />
-                {showAxis && (
-                  <text
-                    x={pt.x}
-                    y={H - 8}
-                    textAnchor="middle"
-                    fill="rgba(255,255,255,0.4)"
-                    fontSize="9"
-                    fontFamily="ui-sans-serif, system-ui, sans-serif"
-                  >
-                    {formatAxisDay(p.day)}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-    </AdminCard>
-  );
-}
-
-type Pt = { x: number; y: number };
-
-/** Catmull-Rom → cubic Bézier smooth line (Revenue Overview style). */
-function smoothLinePath(points: Pt[]): string {
-  if (points.length === 0) return "";
-  if (points.length === 1) {
-    return `M ${points[0]!.x.toFixed(1)} ${points[0]!.y.toFixed(1)}`;
-  }
-  let d = `M ${points[0]!.x.toFixed(1)} ${points[0]!.y.toFixed(1)}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const p0 = points[i - 1] ?? points[i]!;
-    const p1 = points[i]!;
-    const p2 = points[i + 1]!;
-    const p3 = points[i + 2] ?? p2;
-    const cp1x = p1.x + (p2.x - p0.x) / 6;
-    const cp1y = p1.y + (p2.y - p0.y) / 6;
-    const cp2x = p2.x - (p3.x - p1.x) / 6;
-    const cp2y = p2.y - (p3.y - p1.y) / 6;
-    d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
-  }
-  return d;
-}
-
-function areaPath(points: Pt[], baselineY: number): string {
-  if (points.length === 0) return "";
-  const line = smoothLinePath(points);
-  const first = points[0]!;
-  const last = points[points.length - 1]!;
-  return `${line} L ${last.x.toFixed(1)} ${baselineY.toFixed(1)} L ${first.x.toFixed(1)} ${baselineY.toFixed(1)} Z`;
-}
-
-/** Round max up to a clean tick ceiling. */
-function niceCeil(max: number): number {
-  if (max <= 4) return Math.max(4, max);
-  const exp = Math.pow(10, Math.floor(Math.log10(max)));
-  const n = Math.ceil(max / exp);
-  const nice = n <= 2 ? 2 : n <= 4 ? 4 : n <= 5 ? 5 : 10;
-  return nice * exp;
-}
-
-function formatChartDay(iso: string, long: boolean): string {
-  const raw = iso.slice(0, 10);
-  const d = new Date(`${raw}T12:00:00Z`);
-  if (Number.isNaN(d.getTime())) {
-    const parts = raw.split("-");
-    return parts.length === 3 ? `${Number(parts[1])}/${Number(parts[2])}` : raw;
-  }
-  return d.toLocaleDateString(undefined, {
-    month: long ? "short" : "short",
-    day: "numeric",
-    timeZone: "UTC",
+/**
+ * Line several day series up on one set of days (the last `range` of them).
+ * The RPC returns every day, zeros included (generate_series), so the last N
+ * entries are the last N days.
+ */
+function alignDays(seriesList: AdminDayCount[][], range: number): { days: string[]; values: number[][] } {
+  const all = new Set<string>();
+  for (const s of seriesList) for (const p of s) all.add(p.day.slice(0, 10));
+  const days = [...all].sort().slice(-range);
+  const values = seriesList.map((s) => {
+    const byDay = new Map(s.map((p) => [p.day.slice(0, 10), dayCount(p)]));
+    return days.map((d) => byDay.get(d) ?? 0);
   });
+  return { days, values };
 }
 
-/** ~1 label per 7 days (n/7), evenly spaced, always include first + last. */
-function pickAxisLabelIndices(days: string[], _range: ChartRange): Set<number> {
-  const n = days.length;
+/** A clean y-axis top and integer step: ≤ 5 gridlines at 1 / 2 / 5 × 10ⁿ. */
+function niceScale(rawMax: number): { max: number; step: number } {
+  if (rawMax <= 4) return { max: 4, step: 1 };
+  const rough = rawMax / 4;
+  const magnitude = 10 ** Math.floor(Math.log10(rough));
+  const norm = rough / magnitude;
+  const step = (norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10) * magnitude;
+  return { max: Math.ceil(rawMax / step) * step, step };
+}
+
+/** Evenly spaced x labels, first and last always included. */
+function axisLabelIndices(n: number, maxLabels: number): number[] {
+  if (n <= 0) return [];
+  if (n === 1) return [0];
+  const count = Math.min(n, Math.max(2, maxLabels));
   const out = new Set<number>();
-  if (n <= 0) return out;
-  if (n === 1) {
-    out.add(0);
-    return out;
-  }
-
-  if (n <= 7) {
-    for (let i = 0; i < n; i++) out.add(i);
-    return out;
-  }
-
-  const target = Math.min(8, Math.max(4, Math.round(n / 7)));
-  out.add(0);
-  out.add(n - 1);
-  if (target <= 2) return out;
-
-  const step = (n - 1) / (target - 1);
-  for (let t = 1; t < target - 1; t++) {
-    out.add(Math.round(t * step));
-  }
-  return out;
+  for (let k = 0; k < count; k++) out.add(Math.round((k * (n - 1)) / (count - 1)));
+  return [...out];
 }
 
-/** Axis labels like "Dec 24". */
-function formatAxisDay(iso: string): string {
-  return formatChartDay(iso, false);
+function linePath(values: number[], x: (i: number) => number, y: (v: number) => number): string {
+  return values.map((v, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
 }
 
-function Stat({ label, value }: { label: string; value: number | string }) {
-  return (
-    <AdminCard>
-      <p className="text-xs uppercase tracking-wide text-white/50">{label}</p>
-      <p className="mt-1 font-serif text-2xl text-white">{value}</p>
-    </AdminCard>
+/** A column centred on `cx`: 4px rounded top, square at the baseline. */
+function columnPath(cx: number, w: number, top: number, base: number): string {
+  const x0 = cx - w / 2;
+  const x1 = cx + w / 2;
+  const r = Math.min(4, w / 2, base - top);
+  const f = (v: number) => v.toFixed(1);
+  return `M${f(x0)},${f(base)}L${f(x0)},${f(top + r)}Q${f(x0)},${f(top)} ${f(x0 + r)},${f(top)}L${f(x1 - r)},${f(top)}Q${f(x1)},${f(top)} ${f(x1)},${f(top + r)}L${f(x1)},${f(base)}Z`;
+}
+
+// ── Formatting ─────────────────────────────────────────────────────────────
+
+const compact = new Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 });
+
+/** 1,284 in full; 12.9K from ten thousand up. */
+function fmtCount(n: number): string {
+  return Math.abs(n) >= 10_000 ? compact.format(n) : n.toLocaleString();
+}
+
+function fmtDay(iso: string, long = false): string {
+  const d = new Date(`${iso.slice(0, 10)}T12:00:00Z`);
+  if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
+  return d.toLocaleDateString(
+    undefined,
+    long
+      ? { weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }
+      : { month: "short", day: "numeric", timeZone: "UTC" },
   );
+}
+
+function plural(n: number, one: string, many: string): string {
+  return n === 1 ? one : many;
 }
