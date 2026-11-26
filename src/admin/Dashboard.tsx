@@ -268,41 +268,44 @@ export function Dashboard() {
       )}
 
       <div className="min-w-0">
-        <header className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3 border-b border-white/8 px-4 py-5 sm:px-8">
-          <div className="min-w-0">
-            <h1 className="font-serif text-2xl text-canvas">
-              {LABELS[route.section]}
-              {route.section === "quiz" && <span className="text-white/40"> · {QUIZ_LABELS[route.sub]}</span>}
-            </h1>
-            <p className="mt-1 text-sm text-white/50">{HINTS[route.section]}</p>
-          </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <button
-              type="button"
-              onClick={() => void toggleAlerts()}
-              disabled={alertsBusy}
-              aria-pressed={alertsOn}
-              title={alertsOn ? "Alerts on — toast when new chat messages arrive" : "Alerts off — no toast notifications"}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium disabled:opacity-40 ${
-                alertsOn
-                  ? "border border-emerald-400/35 bg-emerald-400/15 text-emerald-100"
-                  : "border border-white/12 text-white/45"
-              }`}
-            >
-              {alertsOn ? "Alerts on" : "Alerts off"}
-            </button>
-            <button
-              type="button"
-              onClick={() => void handleSignOut()}
-              disabled={signingOut}
-              className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 hover:text-canvas disabled:opacity-40"
-            >
-              {signingOut ? "Signing out…" : "Sign out"}
-            </button>
+        <header className="border-b border-white/8">
+          {/* Same column as <main>, so the title lines up with the content under it. */}
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-start justify-between gap-x-6 gap-y-3 px-4 py-5 sm:px-8">
+            <div className="min-w-0">
+              <h1 className="font-serif text-2xl text-canvas">
+                {LABELS[route.section]}
+                {route.section === "quiz" && <span className="text-white/40"> · {QUIZ_LABELS[route.sub]}</span>}
+              </h1>
+              <p className="mt-1 text-sm text-white/50">{HINTS[route.section]}</p>
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <button
+                type="button"
+                onClick={() => void toggleAlerts()}
+                disabled={alertsBusy}
+                aria-pressed={alertsOn}
+                title={alertsOn ? "Alerts on — toast when new chat messages arrive" : "Alerts off — no toast notifications"}
+                className={`rounded-full px-3 py-1.5 text-xs font-medium disabled:opacity-40 ${
+                  alertsOn
+                    ? "border border-emerald-400/35 bg-emerald-400/15 text-emerald-100"
+                    : "border border-white/12 text-white/45"
+                }`}
+              >
+                {alertsOn ? "Alerts on" : "Alerts off"}
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleSignOut()}
+                disabled={signingOut}
+                className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 hover:text-canvas disabled:opacity-40"
+              >
+                {signingOut ? "Signing out…" : "Sign out"}
+              </button>
+            </div>
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-8">
+        <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-8">
           <SectionView
             route={route}
             navigate={go}

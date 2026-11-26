@@ -5,7 +5,9 @@ import { sizedImageUrl } from "../lib/imageUrl";
 
 /**
  * Web stand-in for the app's BlurImage (admin brief §3): a lazy image over
- * the work's accent colour, with no caching or zoom machinery.
+ * the work's accent colour, with no caching or zoom machinery. Like the app's,
+ * it fills its slot (h-full w-full): the image is absolutely positioned, so
+ * without that the box collapses to zero height and nothing shows.
  */
 export default function BlurImage({
   src,
@@ -27,7 +29,7 @@ export default function BlurImage({
   const [failed, setFailed] = useState(false);
   const url = thumbWidth ? sizedImageUrl(src, thumbWidth) : src;
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ backgroundColor: accent }}>
+    <div className={`relative h-full w-full overflow-hidden ${className}`} style={{ backgroundColor: accent }}>
       {url && !failed && (
         <img
           src={url}

@@ -25,12 +25,12 @@ const csp = [
 
 /**
  * /admin (AD-WEBSITE-ADMIN-PROMPT.md §4.4): talks to Supabase (https + wss for
- * realtime chat) and the Narsil backend only. Images come from the catalog's
- * hosts: S3 / CloudFront, Wikimedia, wsrv.nl (the app's grid resizer), and
+ * realtime chat) and this site only — Narsil backend calls go through the
+ * same-origin relay at /api/admin/*. Images come from the catalog's hosts:
+ * S3 / CloudFront, Wikimedia, wsrv.nl (the app's grid resizer), and
  * Google / Supabase for avatars.
  */
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "") ?? "";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:4000";
 const adminCsp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
@@ -40,7 +40,7 @@ const adminCsp = [
   // Images can't run code; scripts and connections stay locked down below.
   "img-src 'self' data: blob: https:",
   "font-src 'self'",
-  `connect-src 'self' ${supabaseUrl} ${supabaseUrl.replace(/^http/, "ws")} ${apiUrl}${dev ? " ws:" : ""}`,
+  `connect-src 'self' ${supabaseUrl} ${supabaseUrl.replace(/^http/, "ws")}${dev ? " ws:" : ""}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
